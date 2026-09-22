@@ -1,0 +1,129 @@
+---
+import Icon from './Icon.astro'
+import Button from './Button.astro'
+import Eyebrow from './Eyebrow.astro'
+
+const steps = [
+  { icon: 'disc', label: 'Rolamentos', hint: 'ponto de partida da manutenção' },
+  { icon: 'box', label: 'Mancais', hint: 'suporte e fixação' },
+  { icon: 'gear', label: 'Acoplamentos', hint: 'transmissão de movimento' },
+  { icon: 'droplet', label: 'Vedações', hint: 'retentores e gaxetas' },
+  { icon: 'wrench', label: 'Buchas e acessórios', hint: 'montagem e desmontagem' },
+] as const
+---
+
+<section id="mro" class="navy-premium relative overflow-hidden py-16 lg:py-20">
+  <span aria-hidden="true" class="chain-grid pointer-events-none absolute inset-0"></span>
+
+  <span
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-28 -left-24 size-80 rounded-full bg-accent-orange/12 blur-3xl"
+  ></span>
+
+  <div class="relative mx-auto max-w-page px-6 lg:px-10">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,460px)] lg:items-center lg:gap-16">
+      {/* Texto */}
+      <div class="max-w-xl">
+        <Eyebrow tone="light">Uma solução mais completa para MRO</Eyebrow>
+
+        <h2 class="mt-3 font-display text-3xl leading-tight font-extrabold text-neutral-light sm:text-4xl">
+          Componentes para diferentes necessidades de manutenção
+        </h2>
+
+        <span aria-hidden="true" class="mt-5 block h-[3px] w-16 bg-accent-orange"></span>
+
+        <p class="mt-5 font-sans text-[15px] leading-relaxed text-neutral-light/75 sm:text-base">
+          A necessidade de manutenção nem sempre termina no rolamento. A Pioneira reúne diferentes
+          componentes relacionados à manutenção industrial, permitindo consultar mais itens da
+          aplicação em um mesmo atendimento.
+        </p>
+
+        <Button
+          href="#cotacao"
+          variant="primary"
+          class="mt-7 w-full shadow-[0_14px_30px_-12px_rgba(255,107,0,0.85)] sm:w-auto"
+        >
+          Consultar componentes
+        </Button>
+      </div>
+
+      {/* Diagrama vertical */}
+      <ol class="chain flex flex-col">
+        {steps.map((step, i) => (
+          <>
+            <li class="chain-node group relative flex items-center gap-4 rounded-xl border border-white/12 bg-white/[0.04] px-4 py-3.5 transition-[background-color,border-color] duration-[260ms]">
+              <span class="chain-badge relative flex size-11 shrink-0 items-center justify-center rounded-full text-neutral-light">
+                <Icon name={step.icon} class="size-[18px]" />
+              </span>
+
+              <span class="flex min-w-0 flex-1 flex-col gap-0.5">
+                <span class="font-sans text-[14px] leading-none font-bold tracking-[0.02em] text-neutral-light uppercase">
+                  {step.label}
+                </span>
+                <span class="font-sans text-[12px] leading-snug text-neutral-light/55">
+                  {step.hint}
+                </span>
+              </span>
+
+              <span class="font-display text-[11px] font-extrabold tracking-[0.2em] text-neutral-light/30">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+            </li>
+
+            {i < steps.length - 1 && (
+              <li aria-hidden="true" class="flex h-7 items-center justify-center gap-2">
+                <span class="h-px w-6 bg-white/15"></span>
+                <Icon name="chevron-down" class="size-4 shrink-0 text-accent-orange" />
+                <span class="h-px w-6 bg-white/15"></span>
+              </li>
+            )}
+          </>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .chain-grid {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at 80% 20%, black 0%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse at 80% 20%, black 0%, transparent 72%);
+  }
+
+  .chain-node:hover {
+    background-color: rgb(255 255 255 / 0.07);
+    border-color: rgb(255 107 0 / 0.35);
+  }
+
+  .chain-badge {
+    background-image: linear-gradient(
+      160deg,
+      rgb(255 255 255 / 0.16) 0%,
+      rgb(255 255 255 / 0.04) 100%
+    );
+    border: 1px solid rgb(255 255 255 / 0.16);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.22),
+      inset 0 -10px 14px -10px rgb(255 107 0 / 0.45),
+      0 12px 22px -14px rgb(0 0 0 / 0.85);
+    transition:
+      border-color 260ms ease,
+      background-image 260ms ease;
+  }
+
+  .chain-node:hover .chain-badge {
+    border-color: rgb(255 107 0 / 0.6);
+    background-image: linear-gradient(160deg, rgb(255 107 0 / 0.3) 0%, rgb(255 107 0 / 0.08) 100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chain-node,
+    .chain-badge {
+      transition: none;
+    }
+  }
+</style>

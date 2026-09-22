@@ -1,0 +1,45 @@
+---
+import Button from './Button.astro'
+import BearingDiagram from './BearingDiagram.astro'
+---
+
+<section class="navy-premium relative overflow-hidden border-y border-white/12 py-14 lg:py-16">
+  <span aria-hidden="true" class="cta-grid pointer-events-none absolute inset-0"></span>
+
+  <span
+    aria-hidden="true"
+    class="pointer-events-none absolute -bottom-28 -left-24 size-80 rounded-full bg-accent-orange/12 blur-3xl"
+  ></span>
+
+  <BearingDiagram class="pointer-events-none absolute top-1/2 -right-24 hidden w-[420px] -translate-y-1/2 text-neutral-light opacity-20 lg:block" />
+
+  <div class="relative mx-auto flex max-w-page flex-col items-start gap-7 px-6 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+    <div class="max-w-xl">
+      <h2 class="font-display text-2xl leading-tight font-extrabold text-neutral-light sm:text-3xl">
+        Precisa de um componente para manutenção?
+      </h2>
+      <p class="mt-3 font-sans text-base leading-relaxed text-neutral-light/70">
+        Envie referência, foto, medida ou aplicação e solicite atendimento comercial.
+      </p>
+    </div>
+
+    <Button
+      href="#cotacao"
+      variant="primary"
+      class="w-full shrink-0 shadow-[0_14px_30px_-12px_rgba(255,107,0,0.85)] sm:w-auto"
+    >
+      Solicitar cotação
+    </Button>
+  </div>
+</section>
+
+<style>
+  .cta-grid {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at 10% 0%, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 10% 0%, black 0%, transparent 70%);
+  }
+</style>

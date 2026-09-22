@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro'
+import { site } from '../data/site'
+
+const year = new Date().getFullYear()
+---
+
+<footer class="navy-premium border-t border-white/15">
+  <div class="mx-auto flex max-w-page flex-col items-center gap-3 px-6 py-6 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:px-10 lg:text-left">
+    <p class="shrink-0 font-sans text-xs text-neutral-light/55">
+      © {year} {site.brand}. Todos os direitos reservados.
+    </p>
+
+    <address class="flex items-center gap-2 font-sans text-xs not-italic text-neutral-light/70 lg:whitespace-nowrap">
+      <Icon name="map-pin" class="size-3.5 shrink-0 text-accent-orange" />
+      <span>{site.address}</span>
+    </address>
+
+    <p class="shrink-0 font-sans text-xs text-neutral-light/55">
+      Desenvolvido por{' '}
+      <a
+        href="https://b2marketingindustrial.com.br"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-semibold text-neutral-light/80 transition-colors hover:text-accent-orange"
+      >
+        B2 Marketing Industrial
+      </a>
+    </p>
+  </div>
+</footer>

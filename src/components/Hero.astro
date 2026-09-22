@@ -1,0 +1,200 @@
+---
+import { Picture } from 'astro:assets'
+import heroBg from '../assets/heroBg.png'
+import Icon from './Icon.astro'
+import Button from './Button.astro'
+import Eyebrow from './Eyebrow.astro'
+
+const quickPoints = [
+  { icon: 'wrench', line1: 'Componentes para', line2: 'manutenção industrial' },
+  { icon: 'search', line1: 'Identificação por', line2: 'referência ou aplicação' },
+  { icon: 'users', line1: 'Atendimento', line2: 'comercial B2B' },
+] as const
+---
+
+<section class="relative overflow-hidden border-b border-white/15 bg-primary-dark-900">
+  <div class="hero-photo absolute inset-0 z-[1]">
+    <Picture
+      src={heroBg}
+      alt="Rolamento industrial sobre fundo técnico"
+      widths={[640, 1024, 1536, 1981]}
+      sizes="(min-width: 1024px) 1700px, 100vw"
+      formats={['avif', 'webp']}
+      fallbackFormat="webp"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      class="h-full w-full object-cover"
+      pictureAttributes={{ class: 'block h-full w-full' }}
+    />
+  </div>
+
+  <div class="hero-navy pointer-events-none absolute inset-y-0 left-0 z-[2] w-full"></div>
+
+  <div class="hero-navy-right pointer-events-none absolute inset-y-0 right-0 z-[2] hidden lg:block"></div>
+
+  <div
+    class="hero-dots pointer-events-none absolute inset-y-0 left-0 z-[3] w-full opacity-[0.35] lg:[mask-image:linear-gradient(to_right,black_70%,transparent_100%)]"
+    style="background-image: radial-gradient(circle, rgb(255 255 255 / 0.5) 1px, transparent 1px); background-size: 28px 28px;"
+  ></div>
+
+  <svg
+    class="pointer-events-none absolute left-6 top-6 z-[4] size-4 text-white/50"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+  >
+    <circle cx="12" cy="12" r="9"></circle>
+    <path d="M12 3v4M12 17v4M3 12h4M17 12h4"></path>
+  </svg>
+
+  <div class="relative z-[5] mx-auto max-w-page px-6 py-20 lg:px-10 lg:py-24">
+    <div class="hero-grid grid items-center gap-y-12 lg:gap-x-6">
+      {/* Coluna 1 — textos */}
+      <div class="max-w-xl lg:max-w-none">
+        <Eyebrow tone="light">Componentes para manutenção</Eyebrow>
+
+        <h1 class="mt-2 font-display text-[2.75rem] font-extrabold leading-[1.1] text-neutral-light sm:text-[3rem] lg:text-[2.75rem] xl:text-[3.1rem]">
+          Componentes MRO para manutenção industrial
+        </h1>
+
+        <p class="mt-5 font-sans text-lg font-semibold leading-relaxed text-neutral-light/90 lg:text-[17px]">
+          Mancais, acoplamentos, retentores, vedações, buchas e acessórios para necessidades de
+          manutenção e reposição industrial.
+        </p>
+
+        <p class="mt-3 font-sans text-[15px] leading-relaxed text-neutral-light/70">
+          Envie sua referência, foto, medida ou aplicação para consultar o componente adequado à sua
+          necessidade.
+        </p>
+
+        {/* Caixa de ícones — inline, texto sempre em duas linhas */}
+        <ul class="hero-points relative z-[3] mt-7 inline-flex max-w-full flex-wrap gap-x-5 gap-y-3 rounded-xl border border-white/10 bg-primary-dark-900/55 px-3.5 py-2.5 shadow-[0_18px_40px_-24px_rgba(0,0,0,0.7)] backdrop-blur-md sm:gap-x-6 sm:px-4 lg:w-max lg:max-w-none lg:flex-nowrap lg:gap-x-6">
+          {quickPoints.map((point) => (
+            <li class="hero-point flex items-center gap-2.5">
+              <span class="icon-badge flex size-10 shrink-0 items-center justify-center rounded-lg border border-white/25 bg-white/10 backdrop-blur-sm">
+                <Icon name={point.icon} class="size-[18px] text-neutral-light" />
+              </span>
+              <span class="font-sans text-[13.5px] font-semibold leading-snug text-neutral-light [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">
+                <span class="block whitespace-nowrap">{point.line1}</span>
+                <span class="block whitespace-nowrap">{point.line2}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Botões inline */}
+        <div class="mt-7 flex flex-wrap items-center gap-4">
+          <Button href="#cotacao" variant="primary">
+            Solicite sua cotação
+          </Button>
+          <Button href="#identificar" variant="outline-light" iconName="search" iconPosition="left">
+            Identifique seu componente
+          </Button>
+        </div>
+      </div>
+
+      {/* Coluna 2 — espaço livre: janela do componente ilustrativo */}
+      <div class="hidden lg:block" aria-hidden="true"></div>
+
+      {/* Coluna 3 — espaço reservado ao shortcode (300px) */}
+      <div class="w-full lg:w-[300px]">
+        <slot name="shortcode">
+          <div class="flex min-h-[430px] w-full flex-col items-center justify-center gap-3 border border-dashed border-neutral-light/35 bg-primary-dark-900/80 p-6 text-center backdrop-blur-sm">
+            <span class="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-orange">
+              Espaço reservado
+            </span>
+            <p class="font-display text-lg font-bold text-neutral-light">Shortcode — 300px</p>
+            <p class="font-sans text-sm leading-relaxed text-neutral-light/60">
+              Insira o conteúdo no slot{' '}
+              <code class="font-mono text-neutral-light/85">shortcode</code>
+              do componente Hero.
+            </p>
+          </div>
+        </slot>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Divisórias sutis entre os destaques do hero (a partir de tablet) */
+  @media (width >= 40rem) {
+    .hero-point + .hero-point {
+      padding-left: 1.25rem;
+      border-left: 1px solid rgb(255 255 255 / 0.18);
+    }
+  }
+
+  @media (width >= 64rem) {
+    .hero-point + .hero-point {
+      padding-left: 1.5rem;
+    }
+  }
+
+  /* Metade da largura da página (1250px / 2): ancora as colunas e a foto no mesmo eixo. */
+  .hero-photo,
+  .hero-navy,
+  .hero-navy-right,
+  .hero-dots,
+  .hero-grid {
+    --page-half: calc(var(--container-page) / 2);
+    --page-edge: max(0px, calc(50% - var(--page-half)));
+  }
+
+  .hero-navy {
+    background:
+      radial-gradient(1100px 520px at 12% -8%, rgb(255 255 255 / 0.1) 0%, transparent 55%),
+      linear-gradient(
+        to right,
+        var(--color-primary-dark) 0%,
+        var(--color-primary-dark-800) 55%,
+        transparent 96%
+      );
+  }
+
+  @media (min-width: 1024px) {
+    /* Col 1 (1fr) | Col 2 espaço da foto | Col 3 shortcode 300px */
+    .hero-grid {
+      grid-template-columns: minmax(0, 1fr) 270px 300px;
+    }
+
+    /* A foto termina na borda direita da página; a largura de 1700px posiciona
+         o componente no centro da coluna 2. */
+    .hero-photo {
+      left: auto;
+      right: var(--page-edge);
+      width: 1700px;
+    }
+
+    /* Navy sólido sob a coluna 1, dissolvendo antes da foto. */
+    .hero-navy {
+      width: calc(50% - 20px);
+      background:
+        radial-gradient(900px 520px at 10% -10%, rgb(255 255 255 / 0.1) 0%, transparent 55%),
+        linear-gradient(
+          to left,
+          transparent 0px,
+          rgb(0 24 48 / 0.45) 70px,
+          var(--color-primary-dark-800) 150px,
+          var(--color-primary-dark) 100%
+        );
+    }
+
+    /* Navy da direita: cobre a coluna do shortcode e fecha a margem da página. */
+    .hero-navy-right {
+      width: calc(50% - 261px);
+      background: linear-gradient(
+        to right,
+        transparent 0px,
+        rgb(0 24 48 / 0.55) 200px,
+        var(--color-primary-dark-900) 364px
+      );
+    }
+
+    .hero-dots {
+      width: calc(50% - 60px);
+    }
+  }
+</style>
