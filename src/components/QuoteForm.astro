@@ -11,14 +11,14 @@ const trust = [
 ] as const
 ---
 
-<section id="cotacao" class="bg-neutral-gray-100 pt-8 pb-20">
+<section id="cotacao" class="bg-neutral-gray-100 pt-8 pb-12">
   <div class="mx-auto max-w-page px-6 lg:px-10">
     <div class="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
       {/* Shortcode do formulário; placeholder quando não houver valor */}
       <div class="order-2 w-full lg:order-1">
         <slot name="shortcode">
           {shortcodes.form ? (
-            <div class="min-h-[520px] w-full" set:html={shortcodes.form} />
+            <div class="w-full" set:html={shortcodes.form} />
           ) : (
             <div class="flex min-h-[520px] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-primary-dark/25 bg-neutral-light p-8 text-center shadow-[0_14px_32px_-26px_rgba(0,24,48,0.5)]">
               <span class="font-sans text-[11px] font-semibold tracking-[0.18em] text-accent-orange uppercase">
