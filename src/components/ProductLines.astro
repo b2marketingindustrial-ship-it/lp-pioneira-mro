@@ -138,15 +138,15 @@ const lines: readonly Line[] = [
 
               <p
                 class:list={[
-                  // 3 linhas reservadas: alinha o início dos bullets nos quatro cards
-                  'mt-2 min-h-[4.9em] font-sans text-[13px] leading-relaxed',
+                  // 2 linhas reservadas: alinha o início dos bullets nos quatro cards
+                  'mt-2 min-h-[3.25em] font-sans text-[13px] leading-relaxed',
                   line.dark ? 'text-neutral-light/65' : 'text-ink-soft',
                 ]}
               >
                 {line.description}
               </p>
 
-              <ul class="mt-4 flex flex-col gap-2">
+              <ul class="mt-3 mb-4 flex flex-col gap-2">
                 {line.features.map((feature) => (
                   <li
                     class:list={[
