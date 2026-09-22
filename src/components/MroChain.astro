@@ -1,19 +1,25 @@
 ---
+import { Image } from 'astro:assets'
 import Icon from './Icon.astro'
 import Button from './Button.astro'
 import Eyebrow from './Eyebrow.astro'
+import productComposition from '../assets/mro-product-composition.png'
 
+/* Mesma cadência de produtos da seção 2, mas por outra frente: aqui a dica de
+   cada nó mostra a amplitude técnica fornecida dentro da família (os tipos que
+   a Pioneira atende), e não a função do componente — essa descrição já é o
+   trabalho dos cards da seção 2. */
 const steps = [
-  { icon: 'disc', label: 'Rolamentos', hint: 'ponto de partida da manutenção' },
-  { icon: 'box', label: 'Mancais', hint: 'suporte e fixação' },
-  { icon: 'gear', label: 'Acoplamentos', hint: 'transmissão de movimento' },
-  { icon: 'droplet', label: 'Vedações', hint: 'retentores e gaxetas' },
-  { icon: 'wrench', label: 'Buchas e acessórios', hint: 'montagem e desmontagem' },
+  { icon: 'disc', label: 'Rolamentos', hint: 'esferas, rolos e agulhas' },
+  { icon: 'box', label: 'Mancais', hint: 'conjunto montado ou avulso' },
+  { icon: 'gear', label: 'Acoplamentos', hint: 'elemento elástico ou metálico' },
+  { icon: 'droplet', label: 'Vedações', hint: 'aplicação estática e dinâmica' },
+  { icon: 'wrench', label: 'Buchas e acessórios', hint: 'fixação e ferramenta de montagem' },
 ] as const
 ---
 
-<section id="mro" class="navy-premium relative overflow-hidden py-16 lg:py-20">
-  <span aria-hidden="true" class="chain-grid pointer-events-none absolute inset-0"></span>
+<section id="escopo" class="navy-premium relative overflow-hidden pt-8 pb-16 lg:pt-10 lg:pb-20">
+  <span aria-hidden="true" class="bg-blueprint pointer-events-none absolute inset-0"></span>
 
   <span
     aria-hidden="true"
@@ -21,37 +27,54 @@ const steps = [
   ></span>
 
   <div class="relative mx-auto max-w-page px-6 lg:px-10">
-    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,460px)] lg:items-center lg:gap-16">
-      {/* Texto */}
-      <div class="max-w-xl">
-        <Eyebrow tone="light">Uma solução mais completa para MRO</Eyebrow>
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,460px)] lg:items-stretch lg:gap-16">
+      {/* Texto — a imagem ocupa a sobra para as duas colunas fecharem na mesma altura */}
+      <div class="flex max-w-xl flex-col">
+        {/* Composição de produtos: 16/9 no mobile, faixa 3/1 no desktop */}
+        <div class="mro-product-composition relative mb-7 flex aspect-[16/9] w-full items-center lg:aspect-[3/1] lg:min-h-[10.5rem] lg:flex-none">
+          <Image
+            src={productComposition}
+            alt="Composição de acoplamentos, correias, mancais, vedações e componentes de montagem"
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-contain"
+          />
+        </div>
+
+        <Eyebrow tone="light">Além do rolamento</Eyebrow>
 
         <h2 class="mt-3 font-display text-3xl leading-tight font-extrabold text-neutral-light sm:text-4xl">
-          Componentes para diferentes necessidades de manutenção
+          Resolva a aplicação inteira
+          <br class="hidden sm:block" />
+          em um pedido
         </h2>
 
         <span aria-hidden="true" class="mt-5 block h-[3px] w-16 bg-accent-orange"></span>
 
         <p class="mt-5 font-sans text-[15px] leading-relaxed text-neutral-light/75 sm:text-base">
-          A necessidade de manutenção nem sempre termina no rolamento. A Pioneira reúne diferentes
-          componentes relacionados à manutenção industrial, permitindo consultar mais itens da
-          aplicação em um mesmo atendimento.
+          Do rolamento ao acessório de montagem, a Pioneira fornece a cadeia
+          <br class="hidden sm:block" />
+          completa de componentes da aplicação, com equipe de atendimento
+          <br class="hidden sm:block" />
+          técnico especializado.
         </p>
 
         <Button
-          href="#cotacao"
           variant="primary"
           class="mt-7 w-full shadow-[0_14px_30px_-12px_rgba(255,107,0,0.85)] sm:w-auto"
         >
-          Consultar componentes
+          Solicite sua cotação
         </Button>
       </div>
 
-      {/* Diagrama vertical */}
-      <ol class="chain flex flex-col">
+      {/* Cadeia vertical */}
+      <ol
+        class="flex flex-col lg:h-full lg:justify-between"
+        aria-label="Componentes que acompanham o rolamento"
+      >
         {steps.map((step, i) => (
           <>
-            <li class="chain-node group relative flex items-center gap-4 rounded-xl border border-white/12 bg-white/[0.04] px-4 py-3.5 transition-[background-color,border-color] duration-[260ms]">
+            <li class="chain-node relative flex items-center gap-4 rounded-xl border border-white/12 bg-white/[0.04] px-4 py-3.5 transition-[background-color,border-color] duration-[260ms]">
               <span class="chain-badge relative flex size-11 shrink-0 items-center justify-center rounded-full text-neutral-light">
                 <Icon name={step.icon} class="size-[18px]" />
               </span>
@@ -72,9 +95,9 @@ const steps = [
 
             {i < steps.length - 1 && (
               <li aria-hidden="true" class="flex h-7 items-center justify-center gap-2">
-                <span class="h-px w-6 bg-white/15"></span>
+                <span class="h-px w-6 bg-white/15" />
                 <Icon name="chevron-down" class="size-4 shrink-0 text-accent-orange" />
-                <span class="h-px w-6 bg-white/15"></span>
+                <span class="h-px w-6 bg-white/15" />
               </li>
             )}
           </>
@@ -85,13 +108,17 @@ const steps = [
 </section>
 
 <style>
-  .chain-grid {
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
-    background-size: 44px 44px;
-    mask-image: radial-gradient(ellipse at 80% 20%, black 0%, transparent 72%);
-    -webkit-mask-image: radial-gradient(ellipse at 80% 20%, black 0%, transparent 72%);
+  .mro-product-composition::after {
+    content: '';
+    position: absolute;
+    right: 8%;
+    bottom: 2%;
+    left: 8%;
+    z-index: -1;
+    height: 16%;
+    border-radius: 9999px;
+    background: rgb(0 0 0 / 0.35);
+    filter: blur(22px);
   }
 
   .chain-node:hover {

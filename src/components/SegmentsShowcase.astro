@@ -4,7 +4,6 @@ import type { ImageMetadata } from 'astro'
 import Icon from './Icon.astro'
 import Eyebrow from './Eyebrow.astro'
 import Button from './Button.astro'
-import BearingDiagram from './BearingDiagram.astro'
 import alimenticiaPhoto from '../assets/segmentos/industria-alimenticia.png'
 import ceramicaPhoto from '../assets/segmentos/ceramica.png'
 import usinagemPhoto from '../assets/segmentos/usinagem.png'
@@ -27,24 +26,25 @@ type IconName =
 interface Segment {
   id: string
   icon: IconName
+  /** Rótulo curto da aba; o título do painel pode ser mais longo. */
   label: string
   title: string
   description: string
-  bullets: readonly string[]
-  photo?: ImageMetadata
-  alt?: string
+  bullets: readonly [string, string, string]
+  photo: ImageMetadata
+  alt: string
 }
 
 const segments: readonly Segment[] = [
   {
     id: 'alimenticia',
     icon: 'utensils',
-    label: 'Indústria Alimentícia',
-    title: 'Indústria Alimentícia',
+    label: 'Indústria alimentícia',
+    title: 'Indústria alimentícia',
     description:
       'Componentes para linhas de processamento e envase, em operação contínua e com rotinas frequentes de limpeza.',
     bullets: [
-      'Mancais e caixas para transportadores',
+      'Mancais para transportadores',
       'Acoplamentos de acionamento',
       'Retentores e vedações',
     ],
@@ -58,11 +58,7 @@ const segments: readonly Segment[] = [
     title: 'Cerâmica',
     description:
       'Componentes para equipamentos de preparação de massa, prensagem e secagem, em ambientes com poeira abrasiva e calor.',
-    bullets: [
-      'Mancais para prensas e moinhos',
-      'Acoplamentos de transmissão',
-      'Vedações e anéis raspadores',
-    ],
+    bullets: ['Mancais para prensas', 'Acoplamentos de transmissão', 'Vedações e anéis raspadores'],
     photo: ceramicaPhoto,
     alt: 'Linha de produção de peças cerâmicas',
   },
@@ -73,11 +69,7 @@ const segments: readonly Segment[] = [
     title: 'Usinagem',
     description:
       'Componentes para máquinas-ferramenta e centros de usinagem, onde montagem e ajuste exigem precisão.',
-    bullets: [
-      'Buchas de fixação e desmontagem',
-      'Retentores e V-Rings',
-      'Porcas, arruelas e acessórios',
-    ],
+    bullets: ['Fixação e desmontagem', 'Retentores e V-Rings', 'Porcas, arruelas e acessórios'],
     photo: usinagemPhoto,
     alt: 'Centro de usinagem CNC em operação',
   },
@@ -90,7 +82,7 @@ const segments: readonly Segment[] = [
       'Componentes para britadores, peneiras e transportadores, sujeitos a cargas elevadas, impacto e contaminação.',
     bullets: [
       'Mancais bipartidos e pedestal',
-      'Acoplamentos de grade e engrenagem',
+      'Acoplamentos de grade',
       'Vedações para ambientes severos',
     ],
     photo: mineracaoPhoto,
@@ -99,15 +91,11 @@ const segments: readonly Segment[] = [
   {
     id: 'papel-celulose',
     icon: 'file-text',
-    label: 'Papel e Celulose',
-    title: 'Papel e Celulose',
+    label: 'Papel e celulose',
+    title: 'Papel e celulose',
     description:
       'Componentes para máquinas de papel, refinadores e secadores, em ambientes úmidos e de operação ininterrupta.',
-    bullets: [
-      'Mancais e caixas para rolamentos',
-      'Acoplamentos elásticos e de lâminas',
-      'Retentores e gaxetas',
-    ],
+    bullets: ['Mancais e caixas', 'Acoplamentos elásticos', 'Retentores e gaxetas'],
     photo: papelPhoto,
     alt: 'Máquina de papel com bobinas em fábrica de celulose',
   },
@@ -129,28 +117,24 @@ const segments: readonly Segment[] = [
   {
     id: 'automacao',
     icon: 'cpu',
-    label: 'Automação Industrial',
-    title: 'Automação Industrial',
+    label: 'Automação industrial',
+    title: 'Automação industrial',
     description:
       'Componentes para sistemas automatizados, movimentação e acionamentos, com foco em reposição e montagem.',
-    bullets: [
-      'Mancais flangeados e pedestal',
-      'Acoplamentos elásticos e de pinos',
-      'Buchas e acessórios de montagem',
-    ],
+    bullets: ['Mancais flangeados e pedestal', 'Acoplamentos de pinos', 'Acessórios de montagem'],
     photo: automacaoPhoto,
     alt: 'Robôs industriais em célula automatizada',
   },
   {
     id: 'outras',
     icon: 'more-horizontal',
-    label: 'Outras Indústrias',
-    title: 'Outras Indústrias',
+    label: 'Outras aplicações',
+    title: 'Outras aplicações industriais',
     description:
-      'Não encontrou o seu segmento? Envie referência, foto, medida ou aplicação para consultar o componente adequado à sua necessidade.',
+      'Não encontrou o seu segmento? Envie referência, foto, medida ou aplicação para consultar o componente adequado.',
     bullets: [
-      'Identificação por referência ou aplicação',
-      'Componentes para manutenção e reposição',
+      'Identificação por referência',
+      'Manutenção e reposição',
       'Atendimento comercial B2B',
     ],
     photo: outrasPhoto,
@@ -166,15 +150,12 @@ const first = segments[0].id
     <div class="max-w-2xl">
       <Eyebrow>Segmentos atendidos</Eyebrow>
       <h2 class="mt-3 font-display text-3xl leading-tight font-extrabold text-ink sm:text-4xl">
-        Atendimento a diferentes segmentos industriais
+        Seu setor, suas condições de operação
       </h2>
-      <p class="mt-3 font-sans text-[15px] leading-relaxed text-ink-soft">
-        Componentes de manutenção e reposição para diferentes processos produtivos.
-      </p>
     </div>
 
     <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[260px_minmax(0,1fr)_minmax(0,1fr)] lg:items-stretch lg:gap-8 xl:grid-cols-[280px_minmax(0,1fr)_minmax(0,1fr)] xl:gap-10">
-      {/* Coluna 1 — cabeçalho e lista de segmentos */}
+      {/* Coluna 1 — trilho de abas (vertical no desktop, horizontal no mobile) */}
       <div class="flex min-w-0 flex-col">
         <div
           role="tablist"
@@ -191,7 +172,7 @@ const first = segments[0].id
               aria-selected={segment.id === first ? 'true' : 'false'}
               tabindex={segment.id === first ? 0 : -1}
               data-segment={segment.id}
-              class="segment-tab group relative flex shrink-0 items-center gap-3 overflow-hidden rounded-xl border border-neutral-gray-200/70 bg-neutral-light px-3.5 py-2.5 text-left font-sans text-[13.5px] font-semibold whitespace-nowrap text-ink shadow-[0_1px_2px_rgba(13,29,48,0.05)] transition-[background-color,color,border-color,transform] duration-200 hover:border-accent-orange/50 lg:w-full lg:whitespace-normal"
+              class="segment-tab group relative flex shrink-0 cursor-pointer items-center gap-3 overflow-hidden rounded-xl border border-neutral-gray-200/70 bg-neutral-light px-3.5 py-2.5 text-left font-sans text-[13.5px] font-semibold whitespace-nowrap text-ink shadow-[0_1px_2px_rgba(13,29,48,0.05)] transition-[background-color,color,border-color,transform] duration-200 hover:border-accent-orange/50 lg:w-full lg:whitespace-normal"
             >
               <span
                 aria-hidden="true"
@@ -211,7 +192,7 @@ const first = segments[0].id
         </div>
       </div>
 
-      {/* Coluna 2 — painel visual */}
+      {/* Coluna 2 — painel visual com foto e corte diagonal laranja */}
       <div class="relative min-h-[280px] min-w-0 overflow-hidden rounded-2xl sm:min-h-[340px] lg:min-h-0">
         {segments.map((segment, i) => (
           <div
@@ -219,40 +200,19 @@ const first = segments[0].id
             hidden={segment.id !== first}
             class="segment-visual absolute inset-0"
           >
-            {segment.photo ? (
-              <>
-                <Image
-                  src={segment.photo}
-                  alt={segment.alt ?? segment.label}
-                  format="webp"
-                  width={900}
-                  loading="lazy"
-                  decoding="async"
-                  class="h-full w-full object-cover object-center"
-                />
-                <span
-                  aria-hidden="true"
-                  class="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary-dark-900/70 via-primary-dark-900/10 to-transparent"
-                />
-              </>
-            ) : (
-              <div class="navy-premium relative h-full w-full">
-                <span
-                  aria-hidden="true"
-                  class="segment-grid pointer-events-none absolute inset-0"
-                />
-                <BearingDiagram class="pointer-events-none absolute -right-16 -bottom-16 w-[360px] text-neutral-light opacity-[0.14]" />
-                <span
-                  aria-hidden="true"
-                  class="pointer-events-none absolute -top-24 -left-20 size-72 rounded-full bg-accent-orange/15 blur-3xl"
-                />
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <span class="segment-badge flex size-24 items-center justify-center rounded-full text-neutral-light">
-                    <Icon name={segment.icon} class="size-10" />
-                  </span>
-                </div>
-              </div>
-            )}
+            <Image
+              src={segment.photo}
+              alt={segment.alt}
+              format="webp"
+              width={900}
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-cover object-center"
+            />
+            <span
+              aria-hidden="true"
+              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary-dark-900/70 via-primary-dark-900/10 to-transparent"
+            />
 
             {/* Corte diagonal laranja no canto inferior direito */}
             <span
@@ -309,7 +269,7 @@ const first = segments[0].id
               ))}
             </ul>
 
-            <Button href="#cotacao" variant="primary" class="mt-6">
+            <Button variant="primary" class="mt-6">
               Solicite sua cotação
             </Button>
           </div>
@@ -336,12 +296,7 @@ const first = segments[0].id
     transform: translateX(2px);
   }
 
-  .segment-tab:focus-visible {
-    outline: 2px solid var(--color-accent-orange);
-    outline-offset: 2px;
-  }
-
-  /* Lista horizontal no mobile sem barra de rolagem aparente */
+  /* Trilho horizontal no mobile sem barra de rolagem aparente */
   .segment-tabs {
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
@@ -351,30 +306,7 @@ const first = segments[0].id
     display: none;
   }
 
-  /* Malha de blueprint no painel sem foto */
-  .segment-grid {
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
-    background-size: 34px 34px;
-    mask-image: radial-gradient(ellipse at 20% 0%, black 0%, transparent 78%);
-    -webkit-mask-image: radial-gradient(ellipse at 20% 0%, black 0%, transparent 78%);
-  }
-
-  .segment-badge {
-    background-image: linear-gradient(
-      160deg,
-      rgb(255 255 255 / 0.16) 0%,
-      rgb(255 255 255 / 0.04) 100%
-    );
-    border: 1px solid rgb(255 255 255 / 0.18);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.22),
-      inset 0 -14px 20px -14px rgb(255 107 0 / 0.5),
-      0 18px 30px -18px rgb(0 0 0 / 0.85);
-  }
-
-  /* Faixa diagonal laranja, mesma linguagem da referência */
+  /* Faixa diagonal laranja no canto inferior direito da foto */
   .segment-cut {
     clip-path: polygon(100% 0, 100% 100%, 0 100%);
     mix-blend-mode: multiply;

@@ -1,0 +1,266 @@
+---
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import Icon from './Icon.astro'
+import Eyebrow from './Eyebrow.astro'
+import BrandCarousel from './BrandCarousel.astro'
+import mancaisPhoto from '../assets/products/mancais.webp'
+import acoplamentosPhoto from '../assets/products/acoplamentos.webp'
+import vedacoesPhoto from '../assets/products/vedacoes.webp'
+import buchasPhoto from '../assets/products/buchas.webp'
+
+interface Line {
+  index: string
+  tag: string
+  title: string
+  description: string
+  features: readonly [string, string, string]
+  /** Foto recortada; o fundo branco preenche toda a caixa de imagem. */
+  photo: ImageMetadata
+  alt: string
+  /** Um único card escuro por grid, como ponto de destaque visual. */
+  dark?: boolean
+}
+
+const lines: readonly Line[] = [
+  {
+    index: '01',
+    tag: 'Mancais',
+    title: 'Mancais industriais',
+    description: 'Suporte, fixação e aplicação de rolamentos em máquinas industriais.',
+    features: ['Mancais pedestal', 'Mancais bipartidos', 'Caixas para rolamentos'],
+    photo: mancaisPhoto,
+    alt: 'Mancais flangeados para eixos industriais',
+  },
+  {
+    index: '02',
+    tag: 'Acoplamentos',
+    title: 'Acoplamentos industriais',
+    description: 'Transmissão de movimento entre motores, bombas e redutores.',
+    features: ['Engrenagem e grade', 'Elásticos', 'Pinos e lâminas'],
+    photo: acoplamentosPhoto,
+    alt: 'Acoplamento elástico de garras com elemento central',
+  },
+  {
+    index: '03',
+    tag: 'Vedação',
+    title: 'Retentores e vedações',
+    description: 'Vedação para diferentes necessidades de máquinas e equipamentos.',
+    features: ['Retentores', 'Gaxetas', 'Anéis raspadores'],
+    photo: vedacoesPhoto,
+    alt: 'Par de retentores de vedação para eixos rotativos',
+  },
+  {
+    index: '04',
+    tag: 'Acessórios',
+    title: 'Buchas e acessórios',
+    description: 'Componentes para fixação, montagem e desmontagem de rolamentos.',
+    features: ['Buchas de fixação', 'Buchas de desmontagem', 'Porcas e arruelas'],
+    photo: buchasPhoto,
+    alt: 'Buchas de fixação, porcas e acessórios de montagem para rolamentos',
+    dark: true,
+  },
+]
+---
+
+<section id="linhas" class="bg-neutral-light pt-20 pb-10">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    {/* Cabeçalho à esquerda, carrossel de marcas à direita */}
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+      <div class="max-w-2xl lg:max-w-md">
+        <Eyebrow>Linhas de produto</Eyebrow>
+        <h2 class="mt-3 font-display text-3xl leading-tight font-extrabold text-ink sm:text-4xl">
+          Encontre a linha do
+          <br class="hidden sm:block" />
+          seu componente
+        </h2>
+        <p class="mt-3 font-sans text-[15px] leading-relaxed text-ink-soft">
+          Cada linha reúne os tipos, medidas e montagens mais pedidos
+          <br class="hidden sm:block" />
+          pela manutenção industrial no dia a dia.
+        </p>
+      </div>
+
+      <BrandCarousel class="w-full lg:w-[720px] lg:shrink-0" />
+    </div>
+
+    <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {lines.map((line) => (
+        <li>
+          <article
+            class:list={[
+              'line-card group relative flex h-full flex-col overflow-hidden rounded-2xl shadow-[0_1px_2px_rgba(13,29,48,0.05)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_28px_56px_-28px_rgba(0,33,71,0.35)]',
+              line.dark
+                ? 'navy-premium border border-white/10 hover:border-accent-orange/60'
+                : 'border border-neutral-gray-200/70 bg-neutral-light hover:border-accent-orange/50',
+            ]}
+          >
+            {/* Barra de acento no topo — cresce no hover */}
+            <span
+              aria-hidden="true"
+              class="absolute inset-x-0 top-0 z-10 h-[3px] origin-left scale-x-0 bg-accent-orange transition-transform duration-300 ease-out group-hover:scale-x-100"
+            />
+
+            {/*
+                Palco do produto: o fundo branco da foto preenche toda a caixa, inclusive no
+                card escuro, onde separa a imagem do painel navy.
+              */}
+            <div class="line-stage relative flex h-36 items-center justify-center overflow-hidden">
+              <span aria-hidden="true" class="line-shadow" />
+              <Image
+                src={line.photo}
+                alt={line.alt}
+                format="webp"
+                width={360}
+                loading="lazy"
+                decoding="async"
+                class="relative z-[1] max-h-[7.75rem] w-auto max-w-[78%] object-contain mix-blend-multiply"
+              />
+
+              <span class="absolute top-4 left-4 z-[2] font-display text-[11px] font-extrabold tracking-[0.2em] text-primary-dark/40">
+                {line.index}
+              </span>
+
+              <span class="absolute top-3.5 right-4 z-[2] rounded-full border border-primary-dark/10 bg-neutral-light px-2.5 py-1 font-sans text-[10px] font-bold tracking-[0.16em] text-primary-dark/75 uppercase">
+                {line.tag}
+              </span>
+            </div>
+
+            <div class="flex flex-1 flex-col px-6 pt-4 pb-4">
+              <h3
+                class:list={[
+                  'font-display text-lg leading-snug font-extrabold',
+                  line.dark ? 'text-neutral-light' : 'text-ink',
+                ]}
+              >
+                {line.title}
+              </h3>
+
+              <p
+                class:list={[
+                  // 3 linhas reservadas: alinha o início dos bullets nos quatro cards
+                  'mt-2 min-h-[4.9em] font-sans text-[13px] leading-relaxed',
+                  line.dark ? 'text-neutral-light/65' : 'text-ink-soft',
+                ]}
+              >
+                {line.description}
+              </p>
+
+              <ul class="mt-4 flex flex-col gap-2">
+                {line.features.map((feature) => (
+                  <li
+                    class:list={[
+                      'flex items-center gap-2.5 font-sans text-[13px] font-medium',
+                      line.dark ? 'text-neutral-light/90' : 'text-ink',
+                    ]}
+                  >
+                    <span
+                      class:list={[
+                        'flex size-5 shrink-0 items-center justify-center rounded-full text-accent-orange',
+                        line.dark ? 'bg-accent-orange/20' : 'bg-accent-orange/10',
+                      ]}
+                    >
+                      <Icon name="check" class="size-3" />
+                    </span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                type="button"
+                class:list={[
+                  'btn-slave-whats mt-auto flex cursor-pointer items-center justify-between gap-3 border-t pt-4 font-sans text-[13px] font-bold transition-colors duration-200',
+                  line.dark
+                    ? 'border-white/15 text-neutral-light hover:text-accent-orange'
+                    : 'border-neutral-gray-200/60 text-primary-dark hover:text-accent-orange',
+                ]}
+              >
+                <span>Falar com especialista</span>
+                <span
+                  class:list={[
+                    'flex size-8 shrink-0 items-center justify-center rounded-full transition-[background-color,color,transform] duration-300 group-hover:translate-x-0.5 group-hover:bg-accent-orange group-hover:text-neutral-light',
+                    line.dark
+                      ? 'bg-white/10 text-neutral-light'
+                      : 'bg-neutral-gray-100 text-primary-dark',
+                  ]}
+                >
+                  <Icon name="arrow-right" class="size-3.5" />
+                </span>
+              </button>
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Palco claro: gradiente suave + malha de pontos que esmaece nas bordas */
+  .line-stage {
+    background-image: linear-gradient(180deg, #f5f7fa 0%, #ffffff 100%);
+  }
+
+  .line-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(0, 33, 71, 0.16) 1px, transparent 1.2px);
+    background-size: 18px 18px;
+    /* Pontos nas bordas, centro limpo atrás do ícone */
+    mask-image: radial-gradient(ellipse at center, transparent 32%, black 90%);
+    -webkit-mask-image: radial-gradient(ellipse at center, transparent 32%, black 90%);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* Sombra elíptica que assenta o produto no palco */
+  .line-shadow {
+    position: absolute;
+    bottom: 1.1rem;
+    left: 50%;
+    z-index: 0;
+    height: 1.25rem;
+    width: 62%;
+    transform: translateX(-50%);
+    border-radius: 9999px;
+    background: radial-gradient(ellipse at center, rgb(0 33 71 / 0.22) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Canto técnico discreto que aparece no hover */
+  .line-card::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 14px;
+    height: 14px;
+    border-right: 2px solid var(--color-accent-orange);
+    border-bottom: 2px solid var(--color-accent-orange);
+    opacity: 0;
+    transform: translate(4px, 4px);
+    transition:
+      opacity 300ms ease,
+      transform 300ms ease;
+    pointer-events: none;
+  }
+
+  .line-card:hover::after {
+    opacity: 0.9;
+    transform: translate(0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .line-card,
+    .line-card *,
+    .line-card::after {
+      transition: none !important;
+    }
+
+    .line-card:hover {
+      transform: none;
+    }
+  }
+</style>

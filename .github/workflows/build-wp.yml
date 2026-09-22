@@ -1,0 +1,48 @@
+name: build-wp
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: wp-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configura Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instala dependências
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Confere o artefato
+        run: test -f dist/index.html
+
+      - name: Publica na branch wp-build
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          cd dist
+          git init -b wp-build
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "ci: build de ${GITHUB_SHA::7}"
+          git push --force "https://x-access-token:${TOKEN}@github.com/${REPO}.git" wp-build

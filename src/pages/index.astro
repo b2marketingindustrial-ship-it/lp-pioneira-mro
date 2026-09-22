@@ -2,30 +2,27 @@
 import Layout from '../layouts/Layout.astro'
 import Header from '../components/Header.astro'
 import Hero from '../components/Hero.astro'
-import ComponentLines from '../components/ComponentLines.astro'
-import IdentifyComponent from '../components/IdentifyComponent.astro'
+import ProductLines from '../components/ProductLines.astro'
+import SupportPanel from '../components/SupportPanel.astro'
 import ApplicationsGallery from '../components/ApplicationsGallery.astro'
 import MroChain from '../components/MroChain.astro'
 import SegmentsShowcase from '../components/SegmentsShowcase.astro'
-import WhyPioneira from '../components/WhyPioneira.astro'
-import CtaBanner from '../components/CtaBanner.astro'
+import WhyBrand from '../components/WhyBrand.astro'
 import QuoteForm from '../components/QuoteForm.astro'
 import Footer from '../components/Footer.astro'
-import { site } from '../data/site'
 ---
 
-<Layout title={site.title} description={site.description}>
+<Layout>
   <Header />
 
   <main id="main">
     <Hero />
-    <ComponentLines />
-    <IdentifyComponent />
+    <ProductLines />
+    <SupportPanel />
     <ApplicationsGallery />
     <MroChain />
     <SegmentsShowcase />
-    <WhyPioneira />
-    <CtaBanner />
+    <WhyBrand />
     <QuoteForm />
   </main>
 

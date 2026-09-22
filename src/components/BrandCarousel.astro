@@ -1,0 +1,114 @@
+---
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import { brands } from '../data/site'
+import bgl from '../assets/brands/bgl.webp'
+import brgMancais from '../assets/brands/brg-mancais.webp'
+import rexon from '../assets/brands/rexon.webp'
+import vulkan from '../assets/brands/vulkan.webp'
+import tecnon from '../assets/brands/tecnon.webp'
+import vedabras from '../assets/brands/vedabras.webp'
+import itw from '../assets/brands/itw.webp'
+
+interface Props {
+  class?: string
+}
+
+const { class: className = '' } = Astro.props
+
+/* O tipo garante que toda marca declarada em site.ts tenha logotipo. */
+const logos: Record<(typeof brands)[number], ImageMetadata> = {
+  BGL: bgl,
+  'BRG Mancais e Vedações': brgMancais,
+  Rexon: rexon,
+  'Vulkan do Brasil': vulkan,
+  Tecnon: tecnon,
+  Vedabrás: vedabras,
+  'ITW Rocol': itw,
+}
+
+/* Lista duplicada: a segunda cópia é decorativa e cobre o deslocamento de -50%. */
+const loop = [...brands, ...brands]
+---
+
+<div class={`brand-carousel ${className}`}>
+  <ul class="brand-track" aria-label="Marcas representadas">
+    {loop.map((brand, i) => (
+      <li class="brand-item" aria-hidden={i >= brands.length ? 'true' : undefined}>
+        <Image
+          src={logos[brand]}
+          alt={brand}
+          format="webp"
+          width={240}
+          loading="lazy"
+          decoding="async"
+          class="brand-logo"
+        />
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .brand-carousel {
+    container-type: inline-size;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 48px,
+      black calc(100% - 48px),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 48px,
+      black calc(100% - 48px),
+      transparent 100%
+    );
+  }
+
+  .brand-track {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    animation: brand-scroll 26s linear infinite;
+  }
+
+  .brand-carousel:hover .brand-track {
+    animation-play-state: paused;
+  }
+
+  /* Três logotipos visíveis: os mais alongados (4,9:1) ficariam ilegíveis com cinco. */
+  .brand-item {
+    display: flex;
+    width: calc(100cqw / 4);
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 1rem;
+  }
+
+  .brand-logo {
+    max-height: 3.25rem;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  @keyframes brand-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand-track {
+      animation: none;
+    }
+  }
+</style>

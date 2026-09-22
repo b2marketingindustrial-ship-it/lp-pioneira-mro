@@ -2,27 +2,26 @@
 import Icon from './Icon.astro'
 
 interface Props {
-  href?: string
-  variant?: 'primary' | 'outline-light' | 'outline-dark'
-  type?: 'button' | 'submit'
+  /** `navy` atende o botão de WhatsApp da seção de cotação (item 4 do blueprint). */
+  variant?: 'primary' | 'outline-light' | 'outline-dark' | 'navy'
   icon?: boolean
-  iconName?: 'arrow-right' | 'search'
+  iconName?: 'arrow-right' | 'search' | 'whatsapp'
   iconPosition?: 'left' | 'right'
   class?: string
 }
 
 const {
-  href,
   variant = 'primary',
-  type = 'button',
   icon = true,
   iconName = 'arrow-right',
   iconPosition = 'right',
   class: className = '',
 } = Astro.props
 
+/* Cantos retos, ícone à direita por padrão. */
 const base = `
-  inline-flex items-center justify-center gap-2.5
+  btn-slave-whats
+  inline-flex cursor-pointer items-center justify-center gap-2.5
   px-6 py-3.5
   font-sans text-[15px] font-semibold
   transition-colors duration-200
@@ -32,17 +31,16 @@ const variants = {
   primary: 'bg-accent-orange text-neutral-light hover:bg-accent-orange-dark',
   'outline-light': 'border border-neutral-light/35 text-neutral-light hover:bg-neutral-light/10',
   'outline-dark': 'border border-ink/25 text-ink hover:bg-ink/5',
+  navy: 'bg-primary-dark text-neutral-light hover:bg-primary-dark-800',
 }
 
 const classes = `${base} ${variants[variant]} ${className}`
-
-const Tag = href ? 'a' : 'button'
 ---
 
-<Tag href={href} type={href ? undefined : type} class={classes}>
+<button type="button" class={classes}>
   {icon && iconPosition === 'left' && <Icon name={iconName} class="size-4 shrink-0" />}
   <span>
     <slot />
   </span>
   {icon && iconPosition === 'right' && <Icon name={iconName} class="size-4 shrink-0" />}
-</Tag>
+</button>

@@ -1,15 +1,17 @@
 ---
 import { Image } from 'astro:assets'
 import logo from '../assets/LOGO.png'
+import { site } from '../data/site'
 ---
 
 <header class="sticky top-0 z-50 bg-primary-dark-900">
   <div class="mx-auto flex max-w-page items-center justify-between gap-3 px-4 py-3 sm:gap-6 sm:px-6 lg:px-10">
-    <a href="/" class="flex shrink-0 items-center self-start">
+    {/* Placa branca pendurada com o logotipo */}
+    <span class="flex shrink-0 items-center self-start">
       <span class="header-plate -mt-3 -mb-10 flex items-center rounded-b-xl bg-neutral-light px-3 pt-1.5 pb-1 shadow-[0_10px_24px_-10px_rgba(0,0,0,0.55)] sm:px-6 sm:pt-2 sm:pb-1.5">
         <Image
           src={logo}
-          alt="Pioneira Rolamentos"
+          alt={site.brand}
           width={240}
           height={200}
           format="webp"
@@ -19,18 +21,18 @@ import logo from '../assets/LOGO.png'
           class="-mt-1 -mb-0.5 h-14 w-auto sm:-mt-2 sm:-mb-1 sm:h-24"
         />
       </span>
-    </a>
+    </span>
 
     <span class="hidden flex-1 text-center font-display text-[15px] font-extrabold tracking-[0.14em] text-neutral-light uppercase sm:block lg:text-[17px]">
       Componentes MRO
     </span>
 
-    <a
-      href="#cotacao"
-      class="inline-flex shrink-0 items-center bg-accent-orange px-4 py-2 font-sans text-[11px] font-bold uppercase tracking-[0.04em] text-neutral-light transition-colors duration-200 hover:bg-accent-orange-dark sm:px-6 sm:py-2.5 sm:text-[13px] sm:tracking-[0.06em]"
+    <button
+      type="button"
+      class="btn-slave-whats inline-flex shrink-0 cursor-pointer items-center bg-accent-orange px-4 py-2 font-sans text-[11px] font-bold tracking-[0.04em] text-neutral-light uppercase transition-colors duration-200 hover:bg-accent-orange-dark sm:px-6 sm:py-2.5 sm:text-[13px] sm:tracking-[0.06em]"
     >
       <span class="sm:hidden">Cotação</span>
       <span class="hidden sm:inline">Solicite sua cotação</span>
-    </a>
+    </button>
   </div>
 </header>

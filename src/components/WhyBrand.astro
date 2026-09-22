@@ -1,39 +1,35 @@
 ---
-import { Picture, Image } from 'astro:assets'
-import technician from '../assets/tecnico-marcas-v2.webp'
+import { Image } from 'astro:assets'
+import sectionBackground from '../assets/why-brand-background.png'
+import technician from '../assets/tecnico-marcas.webp'
 import Icon from './Icon.astro'
 import Button from './Button.astro'
 import Eyebrow from './Eyebrow.astro'
-import benchPhoto from '../assets/finalCta.jpg'
+import { site } from '../data/site'
 
 const reasons = [
   {
     icon: 'search',
-    kicker: 'Conhecimento técnico',
     title: 'Identificação de componentes',
-    description: 'Envie referência, medida, foto ou aplicação para auxiliar na identificação.',
+    description: 'Envie referência, medida ou foto para auxiliar na identificação.',
   },
   {
     icon: 'sliders',
-    kicker: 'Aplicação',
     title: 'Apoio na especificação',
     description: 'Atendimento voltado à necessidade apresentada pela manutenção.',
   },
   {
     icon: 'layers',
-    kicker: 'Portfólio',
     title: 'Componentes para MRO',
-    description: 'Rolamentos e diferentes componentes complementares para aplicações industriais.',
+    description: 'Rolamentos e componentes complementares para aplicações industriais.',
   },
   {
     icon: 'users',
-    kicker: 'Atendimento',
     title: 'Foco em empresas',
     description: 'Relacionamento comercial direcionado a Manutenção, PCM, Engenharia e Compras.',
   },
   {
     icon: 'map-pin',
-    kicker: 'Região',
     title: 'Campinas e região',
     description: 'Presença regional e atuação comercial voltada ao mercado industrial.',
   },
@@ -43,32 +39,20 @@ const reasons = [
 <section id="diferenciais" class="relative bg-neutral-gray-100 pt-6 pb-8" data-why>
   {/* Bloco azul em largura total */}
   <div class="why-hero navy-premium relative overflow-hidden">
-    <span aria-hidden="true" class="why-grid pointer-events-none absolute inset-0"></span>
+    <Image
+      src={sectionBackground}
+      alt=""
+      aria-hidden="true"
+      loading="eager"
+      decoding="async"
+      class="why-background"
+    />
+    <span aria-hidden="true" class="why-overlay pointer-events-none absolute inset-0"></span>
 
-    {/* Foto sangrando à direita (desktop) e no topo (mobile) */}
-    <div class="absolute inset-y-0 right-0 w-full lg:w-[52%] xl:w-1/2">
-      <Picture
-        src={benchPhoto}
-        alt="Componentes industriais e paquímetro sobre bancada de manutenção"
-        widths={[640, 1024, 1600]}
-        sizes="(min-width: 1024px) 52vw, 100vw"
-        formats={['avif', 'webp']}
-        fallbackFormat="webp"
-        loading="lazy"
-        decoding="async"
-        class="absolute inset-0 h-full w-full object-cover object-[40%_center]"
-        pictureAttributes={{ class: 'absolute inset-0 h-full w-full' }}
-      />
-      {/* Degradês que fundem a foto ao azul */}
-      <span
-        aria-hidden="true"
-        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/20 to-transparent lg:bg-gradient-to-r lg:from-primary-dark lg:via-primary-dark/25 lg:to-transparent"
-      ></span>
-      <span
-        aria-hidden="true"
-        class="pointer-events-none absolute inset-x-0 bottom-0 hidden h-2/5 bg-gradient-to-t from-primary-dark-900 to-transparent lg:block"
-      ></span>
-    </div>
+    <span
+      aria-hidden="true"
+      class="pointer-events-none absolute -top-24 -right-20 size-72 rounded-full bg-accent-orange/15 blur-3xl"
+    ></span>
 
     <div class="relative mx-auto w-full max-w-page px-6 pt-10 pb-8 lg:px-10 lg:pt-10 lg:pb-24">
       <span
@@ -76,23 +60,21 @@ const reasons = [
         class="pointer-events-none absolute top-5 left-6 hidden size-[18px] border-t-2 border-l-2 border-accent-orange opacity-90 lg:top-8 lg:left-10 lg:block"
       ></span>
       <div class="max-w-xl lg:max-w-[46%]">
-        <Eyebrow tone="light">Por que escolher a Pioneira</Eyebrow>
+        <Eyebrow tone="light">Por que a {site.brandShort}</Eyebrow>
         <h2 class="mt-3 font-display text-3xl leading-[1.1] font-extrabold text-neutral-light sm:text-4xl xl:text-[44px]">
-          Apoio para sua
+          Quem atende
           <br />
-          necessidade de manutenção.
+          conhece o componente.
         </h2>
 
         <span aria-hidden="true" class="mt-5 block h-[3px] w-16 bg-accent-orange"></span>
 
         <p class="mt-5 font-sans text-[15px] leading-relaxed text-neutral-light/75 sm:text-base">
-          Atendimento comercial para empresas que precisam identificar, especificar e repor
-          componentes de manutenção industrial — de rolamentos a mancais, acoplamentos, vedações,
-          buchas e acessórios.
+          Do outro lado do atendimento está uma equipe que conhece o componente, a aplicação e o que
+          a sua máquina pede.
         </p>
 
         <Button
-          href="#cotacao"
           variant="primary"
           class="mt-7 w-full shadow-[0_14px_30px_-12px_rgba(255,107,0,0.85)] sm:w-auto"
         >
@@ -100,10 +82,11 @@ const reasons = [
         </Button>
       </div>
     </div>
-    <div class="why-people" aria-label="Equipe da Pioneira e marcas disponíveis">
+
+    <div class="why-people">
       <Image
         src={technician}
-        alt="Técnico da Pioneira de braços cruzados, com os logotipos Pioneira, Timken, NTN, NSK, IKO, BRM e Rolmax"
+        alt="Técnico da Pioneira de braços cruzados, cercado pelos logotipos Vedabrás, Tecnon, Rexon, BGL, BRG Mancais, Vulkan e ITW"
         format="webp"
         width={1220}
         loading="lazy"
@@ -117,7 +100,7 @@ const reasons = [
   <div class="relative z-10 mx-auto -mt-16 max-w-page px-6 lg:px-10">
     <ul
       class="why-track -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-3 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0"
-      aria-label="Diferenciais da Pioneira"
+      aria-label={`Diferenciais da ${site.brandShort}`}
     >
       {reasons.map((reason) => (
         <li class="why-card group relative flex w-[78%] shrink-0 snap-start flex-col gap-2.5 overflow-hidden rounded-2xl border border-neutral-gray-200/70 bg-neutral-light p-4 shadow-[0_24px_48px_-24px_rgba(0,24,48,0.45)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1.5 hover:border-accent-orange/50 hover:shadow-[0_32px_60px_-28px_rgba(0,33,71,0.5)] sm:w-[44%] lg:w-auto">
@@ -131,30 +114,25 @@ const reasons = [
               <Icon name={reason.icon} class="size-[18px]" />
             </span>
 
-            <span class="flex min-w-0 flex-col gap-0.5">
-              <span class="font-sans text-[10px] font-semibold tracking-[0.16em] text-accent-orange uppercase">
-                {reason.kicker}
-              </span>
-              <h3 class="line-clamp-2 font-display text-[14px] leading-[1.25] font-extrabold text-ink">
-                {reason.title}
-              </h3>
-            </span>
+            <h3 class="min-h-[2.5em] font-display text-[14px] leading-[1.25] font-extrabold text-ink">
+              {reason.title}
+            </h3>
           </div>
 
-          <p class="line-clamp-3 min-h-[4.9em] font-sans text-[13px] leading-relaxed text-ink-soft">
+          <p class="min-h-[4.9em] font-sans text-[13px] leading-relaxed text-ink-soft">
             {reason.description}
           </p>
         </li>
       ))}
     </ul>
 
-    {/* Setas de navegação (apenas quando a lista rola) */}
+    {/* Setas do trilho — apenas no mobile, onde a lista rola */}
     <div class="mt-3 flex items-center justify-center gap-3 lg:hidden">
       <button
         type="button"
         data-why-prev
         aria-label="Diferencial anterior"
-        class="flex size-10 items-center justify-center rounded-full border border-neutral-gray-200 bg-neutral-light text-primary-dark transition-colors hover:border-accent-orange hover:text-accent-orange"
+        class="flex size-10 cursor-pointer items-center justify-center rounded-full border border-neutral-gray-200 bg-neutral-light text-primary-dark transition-colors hover:border-accent-orange hover:text-accent-orange"
       >
         <Icon name="chevron-right" class="size-4 rotate-180" />
       </button>
@@ -162,7 +140,7 @@ const reasons = [
         type="button"
         data-why-next
         aria-label="Próximo diferencial"
-        class="flex size-10 items-center justify-center rounded-full border border-neutral-gray-200 bg-neutral-light text-primary-dark transition-colors hover:border-accent-orange hover:text-accent-orange"
+        class="flex size-10 cursor-pointer items-center justify-center rounded-full border border-neutral-gray-200 bg-neutral-light text-primary-dark transition-colors hover:border-accent-orange hover:text-accent-orange"
       >
         <Icon name="chevron-right" class="size-4" />
       </button>
@@ -173,57 +151,75 @@ const reasons = [
 <style>
   .why-hero {
     isolation: isolate;
+    min-height: 430px;
   }
+
+  .why-background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 63% center;
+  }
+
+  .why-overlay {
+    z-index: -1;
+    background:
+      linear-gradient(
+        90deg,
+        rgb(0 34 68 / 96%) 0%,
+        rgb(0 34 68 / 88%) 33%,
+        rgb(0 34 68 / 42%) 58%,
+        rgb(0 34 68 / 12%) 100%
+      ),
+      linear-gradient(0deg, rgb(0 21 44 / 38%), transparent 45%);
+  }
+
   .why-people {
     position: relative;
     z-index: 1;
     width: min(100%, 620px);
-    height: 500px;
+    height: 460px;
     margin: 0 auto;
     pointer-events: none;
   }
+
   .why-technician {
     position: absolute;
     z-index: 2;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
-    width: auto;
     height: 100%;
+    width: auto;
     max-width: 100%;
+    transform: translateX(-50%);
     object-fit: contain;
     object-position: bottom center;
     filter: drop-shadow(0 12px 20px rgb(0 15 35 / 25%));
   }
+
   @media (min-width: 1024px) {
     .why-hero {
       display: flex;
       align-items: center;
       min-height: 520px;
     }
+
+    .why-background {
+      object-position: center;
+    }
+
     .why-people {
       position: absolute;
       right: 2%;
       bottom: 0;
       width: 49%;
-      height: 100%;
-      max-height: 560px;
+      /* Abaixo de 100% para a figura não encostar no topo da seção. */
+      height: 88%;
+      max-height: 500px;
     }
-  }
-  @media (max-width: 389px) {
-    .why-people {
-      height: 450px;
-    }
-  }
-
-  /* Malha de blueprint esmaecida no bloco azul */
-  .why-grid {
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
-    background-size: 44px 44px;
-    mask-image: radial-gradient(ellipse at 15% 10%, black 0%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse at 15% 10%, black 0%, transparent 70%);
   }
 
   /* Trilho horizontal sem barra de rolagem aparente */

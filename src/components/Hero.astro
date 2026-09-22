@@ -4,6 +4,7 @@ import heroBg from '../assets/heroBg.png'
 import Icon from './Icon.astro'
 import Button from './Button.astro'
 import Eyebrow from './Eyebrow.astro'
+import { shortcodes } from '../data/site'
 
 const quickPoints = [
   { icon: 'wrench', line1: 'Componentes para', line2: 'manutenção industrial' },
@@ -64,11 +65,6 @@ const quickPoints = [
           manutenção e reposição industrial.
         </p>
 
-        <p class="mt-3 font-sans text-[15px] leading-relaxed text-neutral-light/70">
-          Envie sua referência, foto, medida ou aplicação para consultar o componente adequado à sua
-          necessidade.
-        </p>
-
         {/* Caixa de ícones — inline, texto sempre em duas linhas */}
         <ul class="hero-points relative z-[3] mt-7 inline-flex max-w-full flex-wrap gap-x-5 gap-y-3 rounded-xl border border-white/10 bg-primary-dark-900/55 px-3.5 py-2.5 shadow-[0_18px_40px_-24px_rgba(0,0,0,0.7)] backdrop-blur-md sm:gap-x-6 sm:px-4 lg:w-max lg:max-w-none lg:flex-nowrap lg:gap-x-6">
           {quickPoints.map((point) => (
@@ -86,10 +82,8 @@ const quickPoints = [
 
         {/* Botões inline */}
         <div class="mt-7 flex flex-wrap items-center gap-4">
-          <Button href="#cotacao" variant="primary">
-            Solicite sua cotação
-          </Button>
-          <Button href="#identificar" variant="outline-light" iconName="search" iconPosition="left">
+          <Button variant="primary">Solicite sua cotação</Button>
+          <Button variant="outline-light" iconName="search" iconPosition="left">
             Identifique seu componente
           </Button>
         </div>
@@ -98,20 +92,22 @@ const quickPoints = [
       {/* Coluna 2 — espaço livre: janela do componente ilustrativo */}
       <div class="hidden lg:block" aria-hidden="true"></div>
 
-      {/* Coluna 3 — espaço reservado ao shortcode (300px) */}
+      {/* Coluna 3 — shortcode do chat (300px); placeholder quando não houver valor */}
       <div class="w-full lg:w-[300px]">
         <slot name="shortcode">
-          <div class="flex min-h-[430px] w-full flex-col items-center justify-center gap-3 border border-dashed border-neutral-light/35 bg-primary-dark-900/80 p-6 text-center backdrop-blur-sm">
-            <span class="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-orange">
-              Espaço reservado
-            </span>
-            <p class="font-display text-lg font-bold text-neutral-light">Shortcode — 300px</p>
-            <p class="font-sans text-sm leading-relaxed text-neutral-light/60">
-              Insira o conteúdo no slot{' '}
-              <code class="font-mono text-neutral-light/85">shortcode</code>
-              do componente Hero.
-            </p>
-          </div>
+          {shortcodes.chat ? (
+            <div class="min-h-[430px] w-full" set:html={shortcodes.chat} />
+          ) : (
+            <div class="flex min-h-[430px] w-full flex-col items-center justify-center gap-3 border border-dashed border-neutral-light/35 bg-primary-dark-900/80 p-6 text-center backdrop-blur-sm">
+              <span class="font-sans text-[11px] font-semibold tracking-[0.18em] text-accent-orange uppercase">
+                Espaço reservado
+              </span>
+              <p class="font-display text-lg font-bold text-neutral-light">Shortcode — 300px</p>
+              <p class="font-sans text-sm leading-relaxed text-neutral-light/60">
+                O plugin de atendimento do WordPress injeta o chat neste espaço.
+              </p>
+            </div>
+          )}
         </slot>
       </div>
     </div>
@@ -133,7 +129,7 @@ const quickPoints = [
     }
   }
 
-  /* Metade da largura da página (1250px / 2): ancora as colunas e a foto no mesmo eixo. */
+  /* Metade da largura da página (--container-page / 2): ancora as colunas e a foto no mesmo eixo. */
   .hero-photo,
   .hero-navy,
   .hero-navy-right,
@@ -160,31 +156,31 @@ const quickPoints = [
       grid-template-columns: minmax(0, 1fr) 270px 300px;
     }
 
-    /* A foto termina na borda direita da página; a largura de 1700px posiciona
-         o componente no centro da coluna 2. */
+    /* A foto termina na borda direita da página; 1700px centra o componente na coluna 2. */
     .hero-photo {
       left: auto;
-      right: var(--page-edge);
+      right: calc(var(--page-edge) - 120px);
       width: 1700px;
     }
 
     /* Navy sólido sob a coluna 1, dissolvendo antes da foto. */
     .hero-navy {
-      width: calc(50% - 20px);
+      width: min(72%, 1120px);
       background:
         radial-gradient(900px 520px at 10% -10%, rgb(255 255 255 / 0.1) 0%, transparent 55%),
         linear-gradient(
-          to left,
-          transparent 0px,
-          rgb(0 24 48 / 0.45) 70px,
-          var(--color-primary-dark-800) 150px,
-          var(--color-primary-dark) 100%
+          to right,
+          var(--color-primary-dark) 0%,
+          var(--color-primary-dark-800) 44%,
+          rgb(0 24 48 / 0.78) 59%,
+          rgb(0 24 48 / 0.38) 76%,
+          transparent 100%
         );
     }
 
     /* Navy da direita: cobre a coluna do shortcode e fecha a margem da página. */
     .hero-navy-right {
-      width: calc(50% - 261px);
+      width: calc(50% - 296px);
       background: linear-gradient(
         to right,
         transparent 0px,
