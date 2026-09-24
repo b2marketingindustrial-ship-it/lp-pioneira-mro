@@ -7,25 +7,29 @@ import Button from './Button.astro'
 import Eyebrow from './Eyebrow.astro'
 import { site } from '../data/site'
 
+/* Os cards seguem a cadeia identificar → encontrar → orientar como benefício
+   para a manutenção; os dois últimos dizem com quem e onde a Pioneira atende. */
 const reasons = [
   {
     icon: 'search',
-    title: 'Identificação de componentes',
-    description: 'Envie referência, medida ou foto para auxiliar na identificação.',
+    title: 'Identificação do componente',
+    description:
+      'Referência, foto ou medida bastam para começar. A equipe faz o resto da identificação.',
+  },
+  {
+    icon: 'compass',
+    title: 'Busca do componente certo',
+    description: 'Equivalentes e marcas representadas para localizar o item, mesmo fora de linha.',
   },
   {
     icon: 'sliders',
-    title: 'Apoio na especificação',
-    description: 'Atendimento voltado à necessidade apresentada pela manutenção.',
-  },
-  {
-    icon: 'layers',
-    title: 'Componentes para MRO',
-    description: 'Rolamentos e componentes complementares para aplicações industriais.',
+    title: 'Orientação na aplicação',
+    description:
+      'Especificação alinhada ao regime de trabalho da máquina, não só ao código da peça.',
   },
   {
     icon: 'users',
-    title: 'Foco em empresas',
+    title: 'Atendimento B2B',
     description: 'Relacionamento comercial direcionado a Manutenção, PCM, Engenharia e Compras.',
   },
   {
@@ -71,7 +75,7 @@ const reasons = [
 
         <p class="mt-5 font-sans text-[15px] leading-relaxed text-neutral-light/75 sm:text-base">
           Do outro lado do atendimento está uma equipe que conhece o componente, a aplicação e o que
-          a sua máquina pede.
+          a sua máquina pede, inclusive quando ela está parada.
         </p>
 
         <Button

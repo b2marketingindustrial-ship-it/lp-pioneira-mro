@@ -5,7 +5,7 @@ export const site = {
   address: 'Rua Barão de Parnaíba, 191 - Centro, Campinas - SP, 13013-170',
   title: 'Componentes MRO para manutenção industrial | Pioneira Rolamentos',
   description:
-    'Mancais, acoplamentos, retentores, vedações, buchas e acessórios para manutenção industrial, com apoio técnico na identificação do componente.',
+    'Mancais, acoplamentos, retentores, vedações, buchas e acessórios para manutenção industrial. Apoio técnico para identificar, encontrar, orientar e resolver a necessidade, inclusive com máquina parada.',
 }
 
 /** Marcas representadas — logos no carrossel e lista no card escuro das linhas de produto. */

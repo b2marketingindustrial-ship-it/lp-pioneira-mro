@@ -7,9 +7,9 @@ import Eyebrow from './Eyebrow.astro'
 import { shortcodes } from '../data/site'
 
 const quickPoints = [
-  { icon: 'wrench', line1: 'Componentes para', line2: 'manutenção industrial' },
-  { icon: 'search', line1: 'Identificação por', line2: 'referência ou aplicação' },
-  { icon: 'users', line1: 'Atendimento', line2: 'comercial B2B' },
+  { icon: 'search', line1: 'Identificação sem', line2: 'código em mãos' },
+  { icon: 'layers', line1: 'Do rolamento ao', line2: 'acessório de montagem' },
+  { icon: 'users', line1: 'Atendimento técnico', line2: 'e comercial B2B' },
 ] as const
 ---
 
@@ -54,15 +54,16 @@ const quickPoints = [
     <div class="hero-grid grid items-center gap-y-12 lg:gap-x-6">
       {/* Coluna 1 — textos */}
       <div class="max-w-xl lg:max-w-none">
-        <Eyebrow tone="light">Componentes para manutenção</Eyebrow>
+        <Eyebrow tone="light">Componentes MRO para manutenção industrial</Eyebrow>
 
-        <h1 class="mt-2 font-display text-[2.75rem] font-extrabold leading-[1.1] text-neutral-light sm:text-[3rem] lg:text-[2.75rem] xl:text-[3.1rem]">
-          Componentes MRO para manutenção industrial
+        <h1 class="mt-2 font-display text-[2.5rem] font-extrabold leading-[1.1] text-neutral-light sm:text-[2.9rem] lg:text-[2.5rem] xl:text-[2.9rem]">
+          Componentes MRO para <br class="hidden sm:block" />
+          quem não pode ficar com <br class="hidden sm:block" />a máquina parada
         </h1>
 
         <p class="mt-5 font-sans text-lg font-semibold leading-relaxed text-neutral-light/90 lg:text-[17px]">
-          Mancais, acoplamentos, retentores, vedações, buchas e acessórios para necessidades de
-          manutenção e reposição industrial.
+          Mancais, acoplamentos, retentores, vedações, buchas e acessórios. Sem referência, item não
+          encontrado ou reposição urgente: a Pioneira identifica, encontra, orienta e resolve.
         </p>
 
         {/* Caixa de ícones — inline, texto sempre em duas linhas */}

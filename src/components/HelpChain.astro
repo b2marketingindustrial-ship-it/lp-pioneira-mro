@@ -1,0 +1,208 @@
+---
+import { Image } from 'astro:assets'
+import Icon from './Icon.astro'
+import Button from './Button.astro'
+import Eyebrow from './Eyebrow.astro'
+import { site } from '../data/site'
+import benchPhoto from '../assets/bancada-identificacao.jpg'
+
+/* Cadeia de valor da estratégia: IDENTIFICAR → ENCONTRAR → ORIENTAR → RESOLVER.
+   Cada etapa é escrita como benefício para quem está na manutenção, não como
+   característica da equipe. O último nó é o destino, por isso vai no card escuro. */
+interface Step {
+  verb: string
+  icon: string
+  benefit: string
+  description: string
+  /** Um único card escuro: o destino da cadeia. */
+  dark?: boolean
+}
+
+const steps: readonly Step[] = [
+  {
+    verb: 'Identificar',
+    icon: 'search',
+    benefit: 'Você não precisa chegar com o código.',
+    description:
+      'Referência, foto, medida ou o equipamento onde o item trabalha: a equipe identifica o componente com o que houver.',
+  },
+  {
+    verb: 'Encontrar',
+    icon: 'compass',
+    benefit: 'O componente certo, mesmo fora de linha.',
+    description:
+      'Equivalentes técnicos e marcas representadas, sem prender a manutenção a uma única referência.',
+  },
+  {
+    verb: 'Orientar',
+    icon: 'sliders',
+    benefit: 'Especificação alinhada ao que a máquina pede.',
+    description:
+      'Carga, rotação, contaminação e montagem entram na conversa, não só o código da peça.',
+  },
+  {
+    verb: 'Resolver',
+    icon: 'check-circle',
+    benefit: 'Tudo fechado em um único atendimento.',
+    description:
+      'Do rolamento ao acessório de montagem, a cotação sai com a aplicação inteira especificada.',
+    dark: true,
+  },
+]
+---
+
+<section id="como-ajudamos" class="bg-neutral-gray-100 py-16 lg:py-20">
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,540px)] lg:items-stretch lg:gap-16">
+      {/* Coluna 1 — foto, título, descrição e CTA */}
+      <div class="flex flex-col lg:max-w-xl">
+        <div class="relative aspect-[16/9] w-full overflow-hidden rounded-2xl shadow-[0_24px_48px_-28px_rgba(0,24,48,0.45)]">
+          <Image
+            src={benchPhoto}
+            alt="Rolamentos de esferas e de rolos sobre bancada, ao lado de paquímetro digital e ferramentas de medição"
+            format="webp"
+            width={1100}
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover object-[62%_center]"
+          />
+          <span
+            aria-hidden="true"
+            class="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary-dark-900/70 via-primary-dark-900/10 to-transparent"
+          ></span>
+
+          <span class="absolute bottom-5 left-6 z-[2] flex items-center gap-3">
+            <span aria-hidden="true" class="h-px w-8 bg-accent-orange"></span>
+            <span class="font-sans text-[12px] font-semibold tracking-[0.12em] text-neutral-light uppercase">
+              Referência, foto ou medida
+            </span>
+          </span>
+        </div>
+
+        <Eyebrow class="mt-8">Como a {site.brandShort} ajuda</Eyebrow>
+
+        <h2 class="mt-3 font-display text-3xl leading-tight font-extrabold text-ink sm:text-4xl">
+          Identificar, encontrar, <br class="hidden sm:block" />
+          orientar e resolver
+        </h2>
+
+        <span aria-hidden="true" class="mt-5 block h-[3px] w-16 bg-accent-orange"></span>
+
+        <p class="mt-5 font-sans text-[15px] leading-relaxed text-ink-soft sm:text-base">
+          Quatro etapas do mesmo atendimento, do primeiro contato até o componente aplicado na
+          máquina. Você entra com o que tiver em mãos e sai com a necessidade resolvida.
+        </p>
+
+        <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <Button variant="primary" class="w-full sm:w-auto">
+            Solicite sua cotação
+          </Button>
+          <Button
+            variant="outline-dark"
+            iconName="search"
+            iconPosition="left"
+            class="w-full sm:w-auto"
+          >
+            Identifique seu componente
+          </Button>
+        </div>
+      </div>
+
+      {/* Coluna 2 — as quatro etapas em trilho vertical */}
+      <ol
+        class="chain-rail relative flex flex-col gap-4 pl-14 lg:h-full"
+        aria-label="Etapas do atendimento"
+      >
+        {steps.map((step, i) => (
+          <li class="chain-step group relative lg:flex-1">
+            {/* Nó numerado sobre o trilho */}
+            <span
+              class:list={[
+                'absolute top-1/2 -left-14 z-[2] flex size-11 -translate-y-1/2 items-center justify-center rounded-full border-2 border-accent-orange font-display text-[12px] font-extrabold tracking-[0.1em] shadow-[0_10px_20px_-12px_rgba(0,33,71,0.45)] transition-[background-color,color] duration-300',
+                step.dark
+                  ? 'bg-accent-orange text-neutral-light'
+                  : 'bg-neutral-light text-primary-dark group-hover:bg-accent-orange group-hover:text-neutral-light',
+              ]}
+            >
+              {String(i + 1).padStart(2, '0')}
+            </span>
+
+            <article
+              class:list={[
+                'relative flex h-full items-center gap-4 overflow-hidden rounded-2xl border p-5 shadow-[0_1px_2px_rgba(13,29,48,0.05)] transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_28px_56px_-28px_rgba(0,33,71,0.35)]',
+                step.dark
+                  ? 'navy-premium border-white/10 group-hover:border-accent-orange/60'
+                  : 'border-neutral-gray-200/70 bg-neutral-light group-hover:border-accent-orange/50',
+              ]}
+            >
+              {step.dark && (
+                <span
+                  aria-hidden="true"
+                  class="bg-blueprint pointer-events-none absolute inset-0"
+                />
+              )}
+
+              <span
+                class:list={[
+                  'relative flex size-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-300',
+                  step.dark
+                    ? 'bg-white/10 text-neutral-light'
+                    : 'bg-neutral-gray-100 text-primary-dark-800 group-hover:bg-accent-orange/10 group-hover:text-accent-orange',
+                ]}
+              >
+                <Icon name={step.icon} class="size-5" />
+              </span>
+
+              <span class="relative flex min-w-0 flex-col">
+                <span class="font-sans text-[11px] font-bold tracking-[0.18em] text-accent-orange uppercase">
+                  {step.verb}
+                </span>
+                <h3
+                  class:list={[
+                    'mt-1 font-display text-[17px] leading-snug font-extrabold',
+                    step.dark ? 'text-neutral-light' : 'text-ink',
+                  ]}
+                >
+                  {step.benefit}
+                </h3>
+                <p
+                  class:list={[
+                    'mt-1.5 font-sans text-[13px] leading-relaxed',
+                    step.dark ? 'text-neutral-light/70' : 'text-ink-soft',
+                  ]}
+                >
+                  {step.description}
+                </p>
+              </span>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Segmento de trilho que liga cada nó ao seguinte: do pé do nó (centro + 22px) até o topo
+     do próximo (gap de 1rem + metade do card seguinte - 22px), no centro do nó (pl-14 / 2). */
+  .chain-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: calc(50% + 22px);
+    bottom: calc(-1rem - 50% + 22px);
+    left: calc(-3.5rem + 1.375rem);
+    width: 1px;
+    background: linear-gradient(to bottom, rgb(160 160 160 / 0.6), rgb(255 107 0 / 0.55));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chain-step,
+    .chain-step * {
+      transition: none !important;
+    }
+
+    .chain-step:hover article {
+      transform: none;
+    }
+  }
+</style>
