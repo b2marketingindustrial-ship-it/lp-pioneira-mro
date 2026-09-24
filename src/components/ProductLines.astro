@@ -4,6 +4,7 @@ import type { ImageMetadata } from 'astro'
 import Icon from './Icon.astro'
 import Eyebrow from './Eyebrow.astro'
 import BrandCarousel from './BrandCarousel.astro'
+import { brands } from '../data/site'
 import mancaisPhoto from '../assets/products/mancais.webp'
 import acoplamentosPhoto from '../assets/products/acoplamentos.webp'
 import vedacoesPhoto from '../assets/products/vedacoes.webp'
@@ -63,19 +64,20 @@ const lines: readonly Line[] = [
 ]
 ---
 
-<section id="linhas" class="bg-neutral-light pt-20 pb-10">
+<section id="linhas" class="bg-neutral-light pt-14 pb-16 lg:pt-16">
   <div class="mx-auto max-w-page px-6 lg:px-10">
     {/* Cabeçalho à esquerda, carrossel de marcas à direita */}
     <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
       <div class="max-w-2xl lg:max-w-md">
-        <Eyebrow>Linhas de produto</Eyebrow>
+        <Eyebrow>Etapa 02 · Encontrar</Eyebrow>
         <h2 class="mt-3 font-display text-3xl leading-tight font-extrabold text-ink sm:text-4xl">
           Encontre a linha do <br class="hidden sm:block" />
           seu componente
         </h2>
         <p class="mt-3 font-sans text-[15px] leading-relaxed text-ink-soft">
-          Cada linha reúne os tipos, medidas e montagens mais pedidos <br class="hidden sm:block" />
-          pela manutenção industrial no dia a dia.
+          {brands.length} marcas representadas e busca por equivalente técnico{' '}
+          <br class="hidden sm:block" />
+          quando a referência original não está disponível.
         </p>
       </div>
 

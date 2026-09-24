@@ -5,20 +5,19 @@ import Button from './Button.astro'
 import Eyebrow from './Eyebrow.astro'
 import productComposition from '../assets/mro-product-composition.png'
 
-/* Mesma cadência de produtos da seção 2, mas por outra frente: aqui a dica de
-   cada nó mostra a amplitude técnica fornecida dentro da família (os tipos que
-   a Pioneira atende), e não a função do componente — essa descrição já é o
-   trabalho dos cards da seção 2. */
-const steps = [
-  { icon: 'disc', label: 'Rolamentos', hint: 'esferas, rolos e agulhas' },
-  { icon: 'box', label: 'Mancais', hint: 'conjunto montado ou avulso' },
-  { icon: 'gear', label: 'Acoplamentos', hint: 'elemento elástico ou metálico' },
-  { icon: 'droplet', label: 'Vedações', hint: 'aplicação estática e dinâmica' },
-  { icon: 'wrench', label: 'Buchas e acessórios', hint: 'fixação e ferramenta de montagem' },
+/* Etapa 04: o ganho de consolidar a aplicação, falado para Manutenção e Compras.
+   A lista de produtos já está nas linhas de produto e na imagem ao lado; aqui
+   entram só os efeitos da consolidação, sem promessa de prazo ou estoque. */
+const gains = [
+  { icon: 'file-text', label: 'Uma cotação', hint: 'para todos os itens da aplicação' },
+  { icon: 'layers', label: 'Itens compatíveis', hint: 'conferidos no conjunto, não peça a peça' },
+  { icon: 'users', label: 'Um só interlocutor', hint: 'da dúvida técnica ao pedido' },
+  { icon: 'box', label: 'Menos fornecedores', hint: 'para Compras cadastrar e acompanhar' },
+  { icon: 'search', label: 'Menos tempo de procura', hint: 'sem cotar item por item no mercado' },
 ] as const
 ---
 
-<section id="escopo" class="navy-premium relative overflow-hidden pt-8 pb-16 lg:pt-10 lg:pb-20">
+<section id="escopo" class="navy-premium relative overflow-hidden pt-12 pb-16 lg:pt-16 lg:pb-20">
   <span aria-hidden="true" class="bg-blueprint pointer-events-none absolute inset-0"></span>
 
   <span
@@ -41,7 +40,7 @@ const steps = [
           />
         </div>
 
-        <Eyebrow tone="light">Além do rolamento</Eyebrow>
+        <Eyebrow tone="light">Etapa 04 · Resolver</Eyebrow>
 
         <h2 class="mt-3 font-display text-3xl leading-tight font-extrabold text-neutral-light sm:text-4xl">
           Resolva a aplicação inteira <br class="hidden sm:block" />
@@ -51,11 +50,11 @@ const steps = [
         <span aria-hidden="true" class="mt-5 block h-[3px] w-16 bg-accent-orange"></span>
 
         <p class="mt-5 font-sans text-[15px] leading-relaxed text-neutral-light/75 sm:text-base">
-          Do rolamento ao acessório de montagem, a Pioneira reúne a cadeia{' '}
+          Do rolamento ao acessório de montagem, os componentes da mesma{' '}
           <br class="hidden sm:block" />
-          completa de componentes da aplicação, com orientação técnica{' '}
+          aplicação saem juntos, especificados e cotados de uma vez. Menos{' '}
           <br class="hidden sm:block" />
-          em cada item, para a manutenção fechar tudo em um atendimento.
+          fornecedores para Compras, menos procura para a Manutenção.
         </p>
 
         <Button
@@ -66,42 +65,27 @@ const steps = [
         </Button>
       </div>
 
-      {/* Cadeia vertical */}
-      <ol
-        class="flex flex-col lg:h-full lg:justify-between"
-        aria-label="Componentes que acompanham o rolamento"
-      >
-        {steps.map((step, i) => (
-          <>
-            <li class="chain-node relative flex items-center gap-4 rounded-xl border border-white/12 bg-white/[0.04] px-4 py-3.5 transition-[background-color,border-color] duration-[260ms]">
-              <span class="chain-badge relative flex size-11 shrink-0 items-center justify-center rounded-full text-neutral-light">
-                <Icon name={step.icon} class="size-[18px]" />
-              </span>
+      {/* Ganhos da consolidação — os itens dividem a altura da coluna de texto */}
+      <ul class="flex flex-col gap-3 lg:h-full" aria-label="O que muda ao consolidar a aplicação">
+        {gains.map((gain) => (
+          <li class="chain-node relative flex items-center gap-4 rounded-xl border border-white/12 bg-white/[0.04] px-4 py-3.5 transition-[background-color,border-color] duration-[260ms] lg:flex-1">
+            <span class="chain-badge relative flex size-11 shrink-0 items-center justify-center rounded-full text-neutral-light">
+              <Icon name={gain.icon} class="size-[18px]" />
+            </span>
 
-              <span class="flex min-w-0 flex-1 flex-col gap-0.5">
-                <span class="font-sans text-[14px] leading-none font-bold tracking-[0.02em] text-neutral-light uppercase">
-                  {step.label}
-                </span>
-                <span class="font-sans text-[12px] leading-snug text-neutral-light/55">
-                  {step.hint}
-                </span>
+            <span class="flex min-w-0 flex-1 flex-col gap-1">
+              <span class="font-sans text-[14px] leading-none font-bold tracking-[0.02em] text-neutral-light uppercase">
+                {gain.label}
               </span>
-
-              <span class="font-display text-[11px] font-extrabold tracking-[0.2em] text-neutral-light/30">
-                {String(i + 1).padStart(2, '0')}
+              <span class="font-sans text-[12.5px] leading-snug text-neutral-light/60">
+                {gain.hint}
               </span>
-            </li>
+            </span>
 
-            {i < steps.length - 1 && (
-              <li aria-hidden="true" class="flex h-7 items-center justify-center gap-2">
-                <span class="h-px w-6 bg-white/15" />
-                <Icon name="chevron-down" class="size-4 shrink-0 text-accent-orange" />
-                <span class="h-px w-6 bg-white/15" />
-              </li>
-            )}
-          </>
+            <Icon name="check" class="size-4 shrink-0 text-accent-orange" />
+          </li>
         ))}
-      </ol>
+      </ul>
     </div>
   </div>
 </section>

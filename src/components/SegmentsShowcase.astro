@@ -35,19 +35,16 @@ interface Segment {
   alt: string
 }
 
+/* Cada setor mostra as condições de operação que a especificação considera,
+   não a lista de produtos: o portfólio aparece uma vez só, nas linhas de produto. */
 const segments: readonly Segment[] = [
   {
     id: 'alimenticia',
     icon: 'utensils',
     label: 'Indústria alimentícia',
     title: 'Indústria alimentícia',
-    description:
-      'Componentes para linhas de processamento e envase, em operação contínua e com rotinas frequentes de limpeza.',
-    bullets: [
-      'Mancais para transportadores',
-      'Acoplamentos de acionamento',
-      'Retentores e vedações',
-    ],
+    description: 'Processamento e envase em operação contínua, com rotinas frequentes de limpeza.',
+    bullets: ['Umidade e lavagem frequente', 'Operação contínua em turnos', 'Resíduo de processo'],
     photo: alimenticiaPhoto,
     alt: 'Linha de envase automatizada da indústria alimentícia',
   },
@@ -57,8 +54,8 @@ const segments: readonly Segment[] = [
     label: 'Cerâmica',
     title: 'Cerâmica',
     description:
-      'Componentes para equipamentos de preparação de massa, prensagem e secagem, em ambientes com poeira abrasiva e calor.',
-    bullets: ['Mancais para prensas', 'Acoplamentos de transmissão', 'Vedações e anéis raspadores'],
+      'Preparação de massa, prensagem e secagem, com poeira abrasiva e calor no ambiente.',
+    bullets: ['Poeira abrasiva', 'Calor de secadores e fornos', 'Carga de prensagem'],
     photo: ceramicaPhoto,
     alt: 'Linha de produção de peças cerâmicas',
   },
@@ -68,8 +65,8 @@ const segments: readonly Segment[] = [
     label: 'Usinagem',
     title: 'Usinagem',
     description:
-      'Componentes para máquinas-ferramenta e centros de usinagem, onde montagem e ajuste exigem precisão.',
-    bullets: ['Fixação e desmontagem', 'Retentores e V-Rings', 'Porcas, arruelas e acessórios'],
+      'Máquinas-ferramenta e centros de usinagem, onde montagem e ajuste exigem precisão.',
+    bullets: ['Precisão de montagem e ajuste', 'Fluido de corte e cavaco', 'Rotação elevada'],
     photo: usinagemPhoto,
     alt: 'Centro de usinagem CNC em operação',
   },
@@ -79,12 +76,8 @@ const segments: readonly Segment[] = [
     label: 'Mineração',
     title: 'Mineração',
     description:
-      'Componentes para britadores, peneiras e transportadores, sujeitos a cargas elevadas, impacto e contaminação.',
-    bullets: [
-      'Mancais bipartidos e pedestal',
-      'Acoplamentos de grade',
-      'Vedações para ambientes severos',
-    ],
+      'Britadores, peneiras e transportadores sujeitos a carga elevada, impacto e contaminação.',
+    bullets: ['Impacto e carga elevada', 'Pó e lama no equipamento', 'Operação a céu aberto'],
     photo: mineracaoPhoto,
     alt: 'Equipamentos de mineração em operação a céu aberto',
   },
@@ -94,8 +87,8 @@ const segments: readonly Segment[] = [
     label: 'Papel e celulose',
     title: 'Papel e celulose',
     description:
-      'Componentes para máquinas de papel, refinadores e secadores, em ambientes úmidos e de operação ininterrupta.',
-    bullets: ['Mancais e caixas', 'Acoplamentos elásticos', 'Retentores e gaxetas'],
+      'Máquinas de papel, refinadores e secadores em ambiente úmido e operação ininterrupta.',
+    bullets: ['Umidade e vapor', 'Temperatura nos secadores', 'Operação ininterrupta'],
     photo: papelPhoto,
     alt: 'Máquina de papel com bobinas em fábrica de celulose',
   },
@@ -104,13 +97,8 @@ const segments: readonly Segment[] = [
     icon: 'flame',
     label: 'Siderurgia',
     title: 'Siderurgia',
-    description:
-      'Componentes para laminadores, lingotamento e fornos, em aplicações com altas temperaturas e cargas elevadas.',
-    bullets: [
-      'Mancais para laminação',
-      'Acoplamentos de engrenagem',
-      'Vedações para condições severas',
-    ],
+    description: 'Laminadores, lingotamento e fornos, com altas temperaturas e cargas elevadas.',
+    bullets: ['Altas temperaturas', 'Carga elevada e choque', 'Carepa e contaminação'],
     photo: siderurgiaPhoto,
     alt: 'Laminação de aço incandescente em siderúrgica',
   },
@@ -119,9 +107,8 @@ const segments: readonly Segment[] = [
     icon: 'cpu',
     label: 'Automação industrial',
     title: 'Automação industrial',
-    description:
-      'Componentes para sistemas automatizados, movimentação e acionamentos, com foco em reposição e montagem.',
-    bullets: ['Mancais flangeados e pedestal', 'Acoplamentos de pinos', 'Acessórios de montagem'],
+    description: 'Sistemas automatizados, movimentação e acionamentos em ciclos repetitivos.',
+    bullets: ['Movimento repetitivo', 'Precisão de posicionamento', 'Espaço reduzido de montagem'],
     photo: automacaoPhoto,
     alt: 'Robôs industriais em célula automatizada',
   },
@@ -131,12 +118,8 @@ const segments: readonly Segment[] = [
     label: 'Outras aplicações',
     title: 'Outras aplicações industriais',
     description:
-      'Não encontrou o seu segmento? Envie referência, foto, medida ou aplicação para consultar o componente adequado.',
-    bullets: [
-      'Identificação por referência',
-      'Manutenção e reposição',
-      'Atendimento comercial B2B',
-    ],
+      'Não encontrou o seu setor? A orientação parte do equipamento e da condição em que ele trabalha.',
+    bullets: ['Carga e rotação', 'Contaminação do ambiente', 'Regime de operação'],
     photo: outrasPhoto,
     alt: 'Planta industrial com diferentes equipamentos e aplicações',
   },
@@ -148,7 +131,7 @@ const first = segments[0].id
 <section id="segmentos" class="bg-neutral-gray-100 py-16" data-segments>
   <div class="mx-auto max-w-page px-6 lg:px-10">
     <div class="max-w-2xl">
-      <Eyebrow>Segmentos atendidos</Eyebrow>
+      <Eyebrow>Orientação por setor</Eyebrow>
       <h2 class="mt-3 font-display text-3xl leading-tight font-extrabold text-ink sm:text-4xl">
         Seu setor, suas condições de operação
       </h2>
@@ -258,12 +241,14 @@ const first = segments[0].id
               {segment.description}
             </p>
 
-            <ul class="mt-4 flex flex-col gap-2">
+            <p class="mt-5 font-sans text-[11px] font-bold tracking-[0.14em] text-ink-soft uppercase">
+              O que a especificação considera
+            </p>
+
+            <ul class="mt-2.5 flex flex-col gap-2">
               {segment.bullets.map((bullet) => (
                 <li class="flex items-center gap-3 font-sans text-[15px] font-medium text-ink">
-                  <span class="flex size-5 shrink-0 items-center justify-center rounded-full bg-accent-orange/10 text-accent-orange">
-                    <Icon name="check" class="size-3" />
-                  </span>
+                  <span aria-hidden="true" class="size-1.5 shrink-0 bg-accent-orange" />
                   {bullet}
                 </li>
               ))}

@@ -7,40 +7,32 @@ import Button from './Button.astro'
 import Eyebrow from './Eyebrow.astro'
 import { site } from '../data/site'
 
-/* Os cards seguem a cadeia identificar → encontrar → orientar como benefício
-   para a manutenção; os dois últimos dizem com quem e onde a Pioneira atende. */
+/* O que uma equipe que conhece o componente faz além de identificar, encontrar,
+   especificar e cotar (cada um já tem seção própria). Nada de marcas, região ou
+   cargos aqui, e nenhuma ideia que apareça em outro bloco da página. */
 const reasons = [
   {
-    icon: 'search',
-    title: 'Identificação do componente',
+    icon: 'target',
+    title: 'A causa da falha',
     description:
-      'Referência, foto ou medida bastam para começar. A equipe faz o resto da identificação.',
+      'Desgaste e folga na peça que saiu da máquina mostram o que provocou a falha, para ela não se repetir.',
   },
   {
-    icon: 'compass',
-    title: 'Busca do componente certo',
-    description: 'Equivalentes e marcas representadas para localizar o item, mesmo fora de linha.',
-  },
-  {
-    icon: 'sliders',
-    title: 'Orientação na aplicação',
+    icon: 'shield',
+    title: 'Alerta antes da compra',
     description:
-      'Especificação alinhada ao regime de trabalho da máquina, não só ao código da peça.',
+      'Se o item pedido não combina com a condição de trabalho, a equipe avisa antes da compra.',
   },
   {
-    icon: 'users',
-    title: 'Atendimento B2B',
-    description: 'Relacionamento comercial direcionado a Manutenção, PCM, Engenharia e Compras.',
-  },
-  {
-    icon: 'map-pin',
-    title: 'Campinas e região',
-    description: 'Presença regional e atuação comercial voltada ao mercado industrial.',
+    icon: 'file-text',
+    title: 'O porquê de cada item',
+    description:
+      'A proposta explica o critério técnico de cada escolha, o que facilita a aprovação interna e a comparação.',
   },
 ] as const
 ---
 
-<section id="diferenciais" class="relative bg-neutral-gray-100 pt-6 pb-8" data-why>
+<section id="diferenciais" class="relative bg-neutral-gray-100 pb-12" data-why>
   {/* Bloco azul em largura total */}
   <div class="why-hero navy-premium relative overflow-hidden">
     <Image
@@ -64,7 +56,7 @@ const reasons = [
         class="pointer-events-none absolute top-5 left-6 hidden size-[18px] border-t-2 border-l-2 border-accent-orange opacity-90 lg:top-8 lg:left-10 lg:block"
       ></span>
       <div class="max-w-xl lg:max-w-[46%]">
-        <Eyebrow tone="light">Por que a {site.brandShort}</Eyebrow>
+        <Eyebrow tone="light">Etapa 03 · Orientar</Eyebrow>
         <h2 class="mt-3 font-display text-3xl leading-[1.1] font-extrabold text-neutral-light sm:text-4xl xl:text-[44px]">
           Quem atende
           <br />
@@ -74,8 +66,8 @@ const reasons = [
         <span aria-hidden="true" class="mt-5 block h-[3px] w-16 bg-accent-orange"></span>
 
         <p class="mt-5 font-sans text-[15px] leading-relaxed text-neutral-light/75 sm:text-base">
-          Do outro lado do atendimento está uma equipe que conhece o componente, a aplicação e o que
-          a sua máquina pede, inclusive quando ela está parada.
+          Do outro lado do atendimento está uma equipe que conhece o componente e a aplicação,
+          inclusive quando a máquina está parada.
         </p>
 
         <Button
@@ -103,27 +95,27 @@ const reasons = [
   {/* Cards sobrepostos à base do bloco azul */}
   <div class="relative z-10 mx-auto -mt-16 max-w-page px-6 lg:px-10">
     <ul
-      class="why-track -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-3 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0"
-      aria-label={`Diferenciais da ${site.brandShort}`}
+      class="why-track -mx-6 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-3 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0"
+      aria-label={`Como a equipe da ${site.brandShort} orienta`}
     >
       {reasons.map((reason) => (
-        <li class="why-card group relative flex w-[78%] shrink-0 snap-start flex-col gap-2.5 overflow-hidden rounded-2xl border border-neutral-gray-200/70 bg-neutral-light p-4 shadow-[0_24px_48px_-24px_rgba(0,24,48,0.45)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1.5 hover:border-accent-orange/50 hover:shadow-[0_32px_60px_-28px_rgba(0,33,71,0.5)] sm:w-[44%] lg:w-auto">
+        <li class="why-card group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-neutral-gray-200/70 bg-neutral-light p-5 shadow-[0_24px_48px_-24px_rgba(0,24,48,0.45)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1.5 hover:border-accent-orange/50 hover:shadow-[0_32px_60px_-28px_rgba(0,33,71,0.5)] sm:w-[48%] lg:w-auto lg:p-6">
           <span
             aria-hidden="true"
             class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-accent-orange transition-transform duration-300 ease-out group-hover:scale-x-100"
           />
 
-          <div class="flex items-start gap-2.5">
-            <span class="flex size-9 shrink-0 items-center justify-center rounded-xl bg-neutral-gray-100 text-primary-dark-800 transition-colors duration-300 group-hover:bg-accent-orange/10 group-hover:text-accent-orange">
+          <div class="flex items-center gap-3">
+            <span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-neutral-gray-100 text-primary-dark-800 transition-colors duration-300 group-hover:bg-accent-orange/10 group-hover:text-accent-orange">
               <Icon name={reason.icon} class="size-[18px]" />
             </span>
 
-            <h3 class="min-h-[2.5em] font-display text-[14px] leading-[1.25] font-extrabold text-ink">
+            <h3 class="font-display text-[18px] leading-snug font-extrabold text-ink">
               {reason.title}
             </h3>
           </div>
 
-          <p class="min-h-[4.9em] font-sans text-[13px] leading-relaxed text-ink-soft">
+          <p class="mt-3 font-sans text-[13.5px] leading-relaxed text-ink-soft">
             {reason.description}
           </p>
         </li>
