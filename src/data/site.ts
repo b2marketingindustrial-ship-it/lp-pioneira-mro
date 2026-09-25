@@ -22,7 +22,7 @@ export const brands = [
 /** Shortcodes do plugin de atendimento do WordPress. Vazio mostra o placeholder tracejado. */
 export const shortcodes = {
   /** Slot do Hero, coluna de 300px. */
-  chat: '[atendimento_chat id="default"]',
+  chat: '[atendimento_chat id="default-chat"]',
   /** Slot da seção de cotação. */
-  form: '[atendimento_form id="default-form"]',
+  form: '[atendimento_form id="default-form-2"]',
 }
